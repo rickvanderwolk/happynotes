@@ -1,0 +1,72 @@
+@php use Illuminate\Support\Facades\Auth; @endphp
+    <!DOCTYPE html>
+<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
+    <meta name="turbolinks-cache-control" content="no-preview">
+
+    <title>{{ config('app.name', 'Laravel') }}</title>
+
+    <link rel="icon" type="image/png" href="/favicon-96x96.png" sizes="96x96" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="shortcut icon" href="/favicon.ico" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+    <meta name="apple-mobile-web-app-title" content="happynotes" />
+    <link rel="manifest" href="/site.webmanifest" />
+
+    <!-- Scripts -->
+    @vite(['resources/css/app.scss', 'resources/js/app.js'])
+
+    <!-- Styles -->
+    @livewireStyles
+</head>
+<body>
+<x-banner/>
+
+<meta name="app-base-url" content="{{ url('/') }}">
+<meta name="app-current-route-name" content="{{ Route::currentRouteName() }}">
+<meta name="app-note-id" content="{{ request()->route('id') }}">
+<meta name="app-route-dashboard" content="{{ route('dashboard') }}">
+<meta name="app-route-filter-show" content="{{ route('filter.show') }}">
+<meta name="app-route-filter-exclude-show" content="{{ route('filter.exclude.show') }}">
+<meta name="app-route-filter-search-show" content="{{ route('filter.search.show') }}">
+<meta name="app-route-menu-show" content="{{ route('menu.show') }}">
+<meta name="app-route-notes-show" content="{{ route('notes.show') }}">
+<meta name="app-route-note-create" content="{{ route('note.create') }}">
+<meta name="app-route-note-show" content="{{ route('note.show', ':id') }}">
+<meta name="app-route-note-title-show" content="{{ route('note.title.show', ':id') }}">
+<meta name="app-route-note-emojis-show" content="{{ route('note.emojis.show', ':id') }}">
+<meta name="app-route-profile-show" content="{{ route('profile.show',) }}">
+
+<div id="app" class="container">
+    <div class="row">
+        <div class="col-12 col-sm-11 col-md-10 col-lg-9 col-xl-6 ms-auto me-auto">
+            <div class="row">
+                <div class="col-12 p-0">
+                    @php
+                        $selectedEmojis = optional(Auth::user())->selected_emojis ?? [];
+                        $excludedEmojis = optional(Auth::user())->excluded_emojis ?? [];
+                        $searchQuery = optional(Auth::user())->search_query ?? null;
+                    @endphp
+
+                    <livewire:test-menu
+                        :selectedEmojis="$selectedEmojis"
+                        :excludedEmojis="$excludedEmojis"
+                        :searchQuery="$searchQuery"
+                    />
+                </div>
+                <div class="col-12">
+                    <main>
+                        {{ $slot }}
+                    </main>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@livewireScripts
+</body>
+</html>
