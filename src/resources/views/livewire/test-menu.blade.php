@@ -5,7 +5,7 @@
             <div class="col-12 col-md-12 ms-auto me-auto">
                 @php
                     $currentRouteName = request()->route()->getName();
-                    $idFromRoute = request()->route('id');
+                    $uuidFromRoute = request()->route('note');
                 @endphp
 
 
@@ -15,7 +15,7 @@
                         <div class="col-12 d-flex justify-content-between">
                             @if(request()->routeIs( 'note.show'))
                                 <h3 class="emoji-wrapper">
-                                    <form action="{{ route('note.destroy', ['id' => $idFromRoute]) }}" method="POST">
+                                    <form action="{{ route('note.destroy', ['note' => $uuidFromRoute]) }}" method="POST">
                                         @csrf
                                         @method('DELETE')
                                         <button type="submit" onclick="return confirm('Are you sure you want to delete this note?')">
@@ -29,13 +29,13 @@
 
                             @if(Str::contains($currentRouteName, 'form.'))
                                 <h3 class="emoji-wrapper">
-                                    <a href="{{ route('note.show', ['id' => $idFromRoute]) }}">
+                                    <a href="{{ route('note.show', ['note' => $uuidFromRoute]) }}">
                                         <i class="fa fa-close"></i>
                                     </a>
                                 </h3>
-                            @elseif($idFromRoute !== null)
+                            @elseif($uuidFromRoute !== null)
                                 <h3 class="emoji-wrapper">
-                                    <a href="{{ url("/#item-{$idFromRoute}") }}">
+                                    <a href="{{ url("/#item-{$uuidFromRoute}") }}">
                                         <i class="fa fa-close"></i>
                                     </a>
                                 </h3>

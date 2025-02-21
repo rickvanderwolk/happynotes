@@ -26,10 +26,10 @@ function getRouteUrl(routeName, params = {}) {
     }
 }
 
-const getIdFromRoute = () => {
-    let noteId = document.querySelector(`meta[name="app-note-id"]`)?.getAttribute('content');
-    if (!isNaN(noteId)) {
-        return noteId;
+const getUuidFromRoute = () => {
+    let noteUuid = document.querySelector(`meta[name="app-note-uuid"]`)?.getAttribute('content');
+    if (noteUuid) {
+        return noteUuid;
     }
     return null;
 }
@@ -62,7 +62,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 'note.title.show',
                 'note.emojis.show',
             ].includes(appCurrentRouteName)) {
-                window.location.href = getRouteUrl('note.show', {id: getIdFromRoute()});
+                window.location.href = getRouteUrl('note.show', {note: getUuidFromRoute()});
             } else {
                 window.location.href = getRouteUrl('dashboard');
             }
@@ -96,7 +96,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 'note.title.show',
                 'note.emojis.show',
             ].includes(appCurrentRouteName)) {
-                window.location.href = getRouteUrl('note.emojis.show', {id: getIdFromRoute()});
+                window.location.href = getRouteUrl('note.emojis.show', {note: getUuidFromRoute()});
             } else {
                 window.location.href = getRouteUrl('filter.exclude.show');
             }
@@ -134,7 +134,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 'note.title.show',
                 'note.emojis.show',
             ].includes(appCurrentRouteName)) {
-                window.location.href = getRouteUrl('note.title.show', {id: getIdFromRoute()});
+                window.location.href = getRouteUrl('note.title.show', {uuid: getUuidFromRoute()});
             }
         }
 

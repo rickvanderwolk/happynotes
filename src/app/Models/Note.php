@@ -6,6 +6,7 @@ use App\Scopes\OwnNotesScope;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Str;
 
 class Note extends Model
 {
@@ -15,6 +16,7 @@ class Note extends Model
     protected $primaryKey = 'id';
     public $incrementing = true;
     protected $fillable = [
+        'uuid',
         'user_id',
         'title',
         'body',
@@ -29,6 +31,12 @@ class Note extends Model
     {
         parent::boot();
 
+        static::creating(function ($note) {
+            if (empty($note->uuid)) {
+                $note->uuid = Str::uuid()->toString();
+            }
+        });
+
         static::saved(function ($note) {
             $note->updateUserEmojis();
         });
@@ -41,6 +49,11 @@ class Note extends Model
     protected static function booted()
     {
         static::addGlobalScope(new OwnNotesScope);
+    }
+
+    public function getRouteKeyName()
+    {
+        return 'uuid';
     }
 
     private function getUserId()
