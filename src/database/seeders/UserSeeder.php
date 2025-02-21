@@ -13,14 +13,14 @@ class UserSeeder extends Seeder
             'id' => 1,
             'name' => 'Test User 1',
             'email' => 'user1@example.com',
-            'password' => 'abcdefgh',
+            'password' => 'password1',
         ]);
 
         User::factory()->create([
             'id' => 2,
             'name' => 'Test User 2',
             'email' => 'user2@example.com',
-            'password' => 'abcdefgh',
+            'password' => 'password2',
         ]);
     }
 }

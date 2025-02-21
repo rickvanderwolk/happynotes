@@ -1,13 +1,15 @@
 describe('Authorization Tests', () => {
 
     it('User 2 should be able to see User 2’s notes', () => {
-        cy.login('user2@example.com', 'abcdefgh');
+        const user = Cypress.env("users").user2;
+        cy.login(user.email, user.password);
         cy.visit(`${Cypress.config('baseUrl')}`);
         cy.contains('Note 1 - user 2').should('be.visible');
     });
 
     it('User 2 should be able to access User 2’s notes via direct URL', () => {
-        cy.login('user2@example.com', 'abcdefgh');
+        const user = Cypress.env("users").user2;
+        cy.login(user.email, user.password);
         cy.request({
             url: `${Cypress.config('baseUrl')}/notes/2`,
             failOnStatusCode: false,
@@ -17,13 +19,15 @@ describe('Authorization Tests', () => {
     });
 
     it('User 2 should NOT be able to see User 1’s notes', () => {
-        cy.login('user2@example.com', 'abcdefgh');
+        const user = Cypress.env("users").user2;
+        cy.login(user.email, user.password);
         cy.visit(`${Cypress.config('baseUrl')}`);
         cy.contains('Note 1 - user 1').should('not.exist');
     });
 
     it('User 2 should NOT be able to access User 1’s notes via direct URL', () => {
-        cy.login('user2@example.com', 'abcdefgh');
+        const user = Cypress.env("users").user2;
+        cy.login(user.email, user.password);
         cy.request({
             url: `${Cypress.config('baseUrl')}/notes/1`,
             failOnStatusCode: false,
