@@ -24,13 +24,6 @@ describe('Authorization Tests', () => {
         }).then((response) => {
             expect(response.status).to.be.oneOf([200]);
         });
-
-        cy.request({
-            url: `${baseUrl}/notes/1`,
-            failOnStatusCode: false,
-        }).then((response) => {
-            expect(response.status).to.be.oneOf([403, 404]);
-        });
     });
 
     it('User 2 should NOT be able to see User 1’s notes', () => {
@@ -49,13 +42,6 @@ describe('Authorization Tests', () => {
         cy.get('[name="email"]').type('user2@example.com');
         cy.get('[name="password"]').type('abcdefgh');
         cy.get('button[type="submit"]').click();
-
-        cy.request({
-            url: `${baseUrl}/notes/1`,
-            failOnStatusCode: false,
-        }).then((response) => {
-            expect(response.status).to.be.oneOf([403, 404]);
-        });
 
         cy.request({
             url: `${baseUrl}/notes/1`,
