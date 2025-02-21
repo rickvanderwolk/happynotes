@@ -1,5 +1,5 @@
 {{-- resources/views/components/dynamic-navbar.blade.php --}}
-<div id="main-navbar" class="the-navbar">
+<div id="main-navbar" class="the-navbar" data-cy="the-navbar">
     <div class="container-fluid">
         <div class="row">
             <div class="col-12 col-md-12 ms-auto me-auto">
