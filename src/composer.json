@@ -1,9 +1,10 @@
 {
-    "name": "laravel/laravel",
+    "name": "happynotes/happynotes",
     "type": "project",
-    "description": "The skeleton application for the Laravel framework.",
-    "keywords": ["laravel", "framework"],
-    "license": "MIT",
+    "description": "A note-taking app for free-spirited minds",
+    "keywords": ["happynotes", "notes", "note-taking", "emojis"],
+    "license": "CC0-1.0",
+    "version": "1.1.0",
     "require": {
         "php": "^8.2",
         "laravel/framework": "^11.9",
