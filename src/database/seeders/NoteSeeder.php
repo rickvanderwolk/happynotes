@@ -19,7 +19,7 @@ class NoteSeeder extends Seeder
 
             for ($i = 1; $i <= $notesCount; $i++) {
                 $noteEmojis = array_rand(array_flip($emojis), rand(2, 7));
-                $progress = rand(1, 7) <= 5 ? null : rand(1, 100); // Toevallig 1 op de 5 tot 7 notes een progress
+                $progress = rand(1, 7) <= 5 ? null : rand(1, 100);
 
                 Note::create([
                     'id' => $noteId,
