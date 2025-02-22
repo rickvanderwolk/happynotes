@@ -8,21 +8,51 @@ img.logo {
 }
 
 @media (prefers-color-scheme: dark) {
+    :root {
+        --bg-color: #000;
+        --text-color: white;
+        --btn-bg: #333;
+        --link-color: #313131;
+        --border-color: #313131;
+    }
+
+    body,
+    .list-group-item,
+    #editorjs,
+    h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    h6,
+    p,
+    input,
+    input:active,
+    input:focus,
+    textarea,
+    textarea:active,
+    textarea:focus,
+    input.form-control,
+    input.form-control:focus,
+    textarea.form-control,
+    textarea.form-control:focus,
     hr {
-        border-color: #cecece !important;
+        background-color: var(--bg-color);
+        color: var(--text-color);
+        border-color: var(--border-color);
     }
 
-    html {
-        filter: invert(1) hue-rotate(180deg);
+    a,
+    a .list-group-item,
+    .btn,
+    #menu .fa {
+        color: var(--link-color) !important;
     }
 
-    .no-invert {
-        filter: invert(1) hue-rotate(180deg);
-        filter: invert(1) hue-rotate(180deg);
-    }
-
-    .btn {
-        color: black !important;
+    a:active,
+    a.active,
+    .router-link-exact-active {
+        color: var(--text-color) !important;
     }
 }
 
