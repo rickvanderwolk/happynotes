@@ -259,4 +259,16 @@ a .list-group-item {
     .router-link-exact-active {
         color: var(--text-color) !important;
     }
+
+    .progress,
+    .progress-stacked {
+        background-color: var(--link-color);
+    }
+
+    .form-switch,
+    .form-check-input {
+        background-color: var(--bg-color);
+        color: var(--link-color);
+        border-color: var(--border-color);
+    }
 }
