@@ -27,7 +27,7 @@
 
 <meta name="app-base-url" content="{{ url('/') }}">
 <meta name="app-current-route-name" content="{{ Route::currentRouteName() }}">
-<meta name="app-note-id" content="{{ request()->route('id') }}">
+<meta name="app-note-uuid" content="{{ optional(request()->route('note'))->uuid }}">
 <meta name="app-route-dashboard" content="{{ route('dashboard') }}">
 <meta name="app-route-filter-show" content="{{ route('filter.show') }}">
 <meta name="app-route-filter-exclude-show" content="{{ route('filter.exclude.show') }}">

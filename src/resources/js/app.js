@@ -63,6 +63,10 @@ document.addEventListener('DOMContentLoaded', function () {
                 'note.emojis.show',
             ].includes(appCurrentRouteName)) {
                 window.location.href = getRouteUrl('note.show', {note: getUuidFromRoute()});
+            } else if ([
+                'note.show',
+            ].includes(appCurrentRouteName)) {
+                window.location.href = getRouteUrl('notes.show') + '#note-' + getUuidFromRoute();
             } else {
                 window.location.href = getRouteUrl('dashboard');
             }
