@@ -110,7 +110,7 @@ class NoteController extends Controller
         $note->emojis = json_encode($selectedEmojis, JSON_UNESCAPED_UNICODE);
         $note->save();
 
-        return redirect()->route('note.show', ['uuid' => $note->uuid]);
+        return redirect()->route('note.show', ['note' => $note->uuid]);
     }
 
     public function formEmojis(Note $note)
@@ -128,7 +128,7 @@ class NoteController extends Controller
         $selectedEmojis = collect($selectedEmojis)->flatten()->unique()->values()->toArray();
         $item->emojis = json_encode($selectedEmojis, JSON_UNESCAPED_UNICODE);
         $item->save();
-        return redirect()->route('note.show', ['uuid' => $note->uuid]);
+        return redirect()->route('note.show', ['note' => $note->uuid]);
     }
 
     public function storeBody(Request $request, Note $note)
@@ -158,6 +158,6 @@ class NoteController extends Controller
 
         $note->save();
 
-        return redirect()->route('note.show', ['uuid' => $note->uuid]);
+        return redirect()->route('note.show', ['note' => $note->uuid]);
     }
 }
