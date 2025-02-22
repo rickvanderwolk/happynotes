@@ -1,4 +1,4 @@
-![Happy Notes logo](src/public/favicon-96x96.png)
+![Happy Notes logo](public/favicon-96x96.png)
 
 # Happy Notes
 _A note-taking app for ~~chaotic~~ free-spirited minds 💥🧠📝🎨🚀_
