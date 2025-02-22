@@ -11,10 +11,6 @@ use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\Str;
 
-//Route::get('/register', function () {
-//    abort(403, 'Registration is temporarily disabled.');
-//});
-
 Route::get('/email/verify', function () {
     return view('auth.verify-email');
 })->middleware('auth')->name('verification.notice');
