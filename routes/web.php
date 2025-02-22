@@ -30,52 +30,6 @@ if (config('app.force_email_verification')) {
     $defaultAppMiddlewares[] = 'verified';
 }
 
-Route::get('migration', function () {
-    DB::table('notes')->whereNull('uuid')->get()->each(function ($note) {
-        do {
-            $newUuid = Str::uuid()->toString();
-        } while (DB::table('notes')->where('uuid', $newUuid)->exists());
-
-        DB::table('notes')->where('id', $note->id)->update(['uuid' => $newUuid]);
-    });
-
-    while (true) {
-        $duplicates = DB::table('notes')
-            ->select('uuid')
-            ->groupBy('uuid')
-            ->havingRaw('COUNT(*) > 1')
-            ->pluck('uuid');
-
-        if ($duplicates->isEmpty()) {
-            break;
-        }
-
-        foreach ($duplicates as $duplicateUuid) {
-            $duplicateNotes = DB::table('notes')->where('uuid', $duplicateUuid)->get();
-
-            $first = true;
-            foreach ($duplicateNotes as $note) {
-                if ($first) {
-                    $first = false;
-                    continue;
-                }
-
-                do {
-                    $newUuid = Str::uuid()->toString();
-                } while (DB::table('notes')->where('uuid', $newUuid)->exists());
-
-                DB::table('notes')
-                    ->where('id', $note->id)
-                    ->update(['uuid' => $newUuid]);
-            }
-        }
-    }
-
-    Schema::table('notes', function (Blueprint $table) {
-        $table->unique('uuid');
-    });
-});
-
 Route::middleware($defaultAppMiddlewares)->group(function () {
     Route::get('/menu', function () {
         return view('menu');
