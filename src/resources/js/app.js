@@ -78,7 +78,7 @@ document.addEventListener('DOMContentLoaded', function () {
                     'filter.exclude.show',
                     'filter.search.show',
                 ].includes(appCurrentRouteName)) {
-                window.location.href = getRouteUrl('dashboard')
+                window.location.href = getRouteUrl('notes.show')
             }
         }
 
@@ -121,13 +121,13 @@ document.addEventListener('DOMContentLoaded', function () {
         }
 
         if (event.key === 'm') {
-            if (appCurrentRouteName === 'dashboard') {
+            if (appCurrentRouteName === 'notes.show') {
                 window.location.href = getRouteUrl('menu.show');
             }
         }
 
         if (event.key === 'n') {
-            if (appCurrentRouteName === 'dashboard') {
+            if (appCurrentRouteName === 'notes.show') {
                 window.location.href = getRouteUrl('note.create');
             }
         }
@@ -145,7 +145,7 @@ document.addEventListener('DOMContentLoaded', function () {
         if (
             event.key >= '1'
             && event.key <= '9'
-            && appCurrentRouteName === 'dashboard'
+            && appCurrentRouteName === 'notes.show'
         ) {
             let noteList = document.getElementById('note-list');
 

@@ -38,7 +38,7 @@ class NoteController extends Controller
 
         $notes = $notes->orderBy('updated_at', 'DESC')->paginate(15);
 
-        return view('dashboard', compact('notes'));
+        return view('notes', compact('notes'));
     }
 
     public function show(Note $note)

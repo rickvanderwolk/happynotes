@@ -52,7 +52,7 @@
 
 
 
-                @elseif((request()->routeIs( 'dashboard')))
+                @elseif((request()->routeIs( 'notes.show')))
                     <div class="row">
                         <div class="col-4 d-flex justify-content-start">
                             <h3 class="emoji-wrapper">
