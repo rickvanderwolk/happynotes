@@ -5,12 +5,13 @@
             <div class="col-12 col-md-12 ms-auto me-auto">
                 @php
                     $currentRouteName = request()->route()->getName();
-                    $uuidFromRoute = request()->route('note');
+                    $note = request()->route('note');
+                    $uuidFromRoute = is_object($note) ? $note->uuid : (is_array($note) ? $note['uuid'] : null);
                 @endphp
 
 
 
-                @if((request()->routeIs( 'note.show')))
+            @if((request()->routeIs( 'note.show')))
                     <div class="row">
                         <div class="col-12 d-flex justify-content-between">
                             @if(request()->routeIs( 'note.show'))
@@ -35,7 +36,7 @@
                                 </h3>
                             @elseif($uuidFromRoute !== null)
                                 <h3 class="emoji-wrapper">
-                                    <a href="{{ url("/#item-{$uuidFromRoute}") }}">
+                                    <a href="{{ url("/#note-{$uuidFromRoute}") }}">
                                         <i class="fa fa-close"></i>
                                     </a>
                                 </h3>
