@@ -3,9 +3,13 @@
 use App\Http\Controllers\FilterController;
 use App\Http\Controllers\NoteController;
 use App\Http\Controllers\ProfileExportController;
+use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Foundation\Auth\EmailVerificationRequest;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Schema;
+use Illuminate\Support\Str;
 
 //Route::get('/register', function () {
 //    abort(403, 'Registration is temporarily disabled.');
@@ -29,6 +33,52 @@ $defaultAppMiddlewares = ['auth:sanctum', config('jetstream.auth_session')];
 if (config('app.force_email_verification')) {
     $defaultAppMiddlewares[] = 'verified';
 }
+
+Route::get('migration', function () {
+    DB::table('notes')->whereNull('uuid')->get()->each(function ($note) {
+        do {
+            $newUuid = Str::uuid()->toString();
+        } while (DB::table('notes')->where('uuid', $newUuid)->exists());
+
+        DB::table('notes')->where('id', $note->id)->update(['uuid' => $newUuid]);
+    });
+
+    while (true) {
+        $duplicates = DB::table('notes')
+            ->select('uuid')
+            ->groupBy('uuid')
+            ->havingRaw('COUNT(*) > 1')
+            ->pluck('uuid');
+
+        if ($duplicates->isEmpty()) {
+            break;
+        }
+
+        foreach ($duplicates as $duplicateUuid) {
+            $duplicateNotes = DB::table('notes')->where('uuid', $duplicateUuid)->get();
+
+            $first = true;
+            foreach ($duplicateNotes as $note) {
+                if ($first) {
+                    $first = false;
+                    continue;
+                }
+
+                do {
+                    $newUuid = Str::uuid()->toString();
+                } while (DB::table('notes')->where('uuid', $newUuid)->exists());
+
+                DB::table('notes')
+                    ->where('id', $note->id)
+                    ->update(['uuid' => $newUuid]);
+            }
+        }
+    }
+
+    Schema::table('notes', function (Blueprint $table) {
+        $table->unique('uuid');
+    });
+});
 
 Route::middleware($defaultAppMiddlewares)->group(function () {
     Route::get('/menu', function () {
