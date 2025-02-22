@@ -12,7 +12,7 @@
                         <livewire:progress-bar :percentage="$note->progress" />
                     @endif
                 </div>
-                <div onclick="window.location.href='{{ route('note.emojis.show', ['note' => $note->uuid]) }}'" class="emoji-wrapper emoji-wrapper-left no-invert">
+                <div onclick="window.location.href='{{ route('note.emojis.show', ['note' => $note->uuid]) }}'" class="emoji-wrapper emoji-wrapper-left">
                     @foreach($note->emojis as $emojiIndex => $emoji)
                         <span class="emoji">{{ $emoji }}</span>
                     @endforeach

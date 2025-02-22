@@ -1,5 +1,5 @@
 <div wire:keydown.window.backspace="deselectAll">
-    <div class="emoji-wrapper emoji-wrapper-xl no-invert">
+    <div class="emoji-wrapper emoji-wrapper-xl">
         <div class="row text-center">
             @foreach($currentEmojis as $emoji)
                 <div class="emoji col-2 text-center" wire:click="deselectEmoji('{{ $emoji }}')" style="cursor: pointer;">
