@@ -248,7 +248,9 @@ a .list-group-item {
     a,
     a .list-group-item,
     .btn,
-    #menu .fa {
+    #menu .fa,
+    #main-navbar a:not(.active),
+    #main-navbar button:not(.active) {
         color: var(--link-color) !important;
     }
 
