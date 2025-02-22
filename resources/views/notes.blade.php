@@ -20,7 +20,7 @@
                         @endif
 
                         @if(!empty($note->emojis))
-                            <div class="emoji-wrapper no-invert">
+                            <div class="emoji-wrapper">
                                 @foreach($note->emojis as $emoji)
                                     <span class="emoji">{{ $emoji }}</span>
                                 @endforeach

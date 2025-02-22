@@ -65,14 +65,14 @@
                             </h3>
                         </div>
                         <div class="col-8 d-flex justify-content-end">
-                            <h3 class="emoji-wrapper {{ count($selectedEmojis ?? []) > 0 ? 'no-invert' : '' }}">
+                            <h3 class="emoji-wrapper">
                                 @if(count($selectedEmojis ?? []) > 0)
                                     <a href="{{ route('filter.show') }}" class="{{ request()->is('filter') ? 'active' : '' }}">
                                         @foreach(array_slice($selectedEmojis, 0, 3) as $emoji)
                                             <span class="emoji">{{ $emoji }}</span>
                                         @endforeach
                                         @if(count($selectedEmojis) > 3)
-                                            <i class="fa fa-ellipsis no-invert"></i>
+                                            <i class="fa fa-ellipsis"></i>
                                         @endif
                                     </a>
                                 @else
