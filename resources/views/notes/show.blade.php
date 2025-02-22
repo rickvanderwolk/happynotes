@@ -5,9 +5,9 @@
         @if($note)
             <div class="row" style="margin-top: 8px; margin-bottom: 20px">
                 <div class="col-12">
-                    <h1 onclick="window.location.href='{{ route('note.title.show', ['note' => $note->uuid]) }}'">{{ $note->title }}</h1>
+                    <h1 data-cy="note-title" onclick="window.location.href='{{ route('note.title.show', ['note' => $note->uuid]) }}'">{{ $note->title }}</h1>
                 </div>
-                <div class="col-12">
+                <div data-cy="note-progress-bar" class="col-12">
                     @if($note->progress)
                         <livewire:progress-bar :percentage="$note->progress" />
                     @endif

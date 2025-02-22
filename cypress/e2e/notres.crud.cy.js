@@ -50,4 +50,27 @@ describe("Notes CRUD Tests", () => {
             cy.get("@firstNote").find('[data-cy="emoji-wrapper"]').should("contain.text", emoji);
         });
     });
+
+    it("Edit note title", () => {
+        const updatedTitle = `Updated Note - ${Date.now()}`;
+
+        // **Stap 1: Klik op de eerste notitie**
+        cy.get('[data-cy="note-list"] [data-cy="note-list-item"]')
+            .first()
+            .as("firstNote");
+
+        cy.get("@firstNote").click(); // Open de notitie
+
+        // **Stap 2: Klik op de titel en update deze**
+        cy.get('[data-cy="note-title"]').click();
+
+        cy.get('[data-cy="note-title-editor"]').type(updatedTitle);
+
+        // **Stap 3: Sla de geüpdatete notitie op**
+        cy.get('[data-cy="save-note"]').click();
+        cy.wait(1000); // Wacht tot Livewire bijwerkt
+
+        // **Stap 4: Controleer of de titel correct is geüpdatet**
+        cy.get('[data-cy="note-title"]').should("contain.text", updatedTitle);
+    });
 });
