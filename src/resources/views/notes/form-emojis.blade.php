@@ -2,7 +2,7 @@
     <x-slot name="header"></x-slot>
 
     <div class="container">
-        <form action="{{ route('note.emojis.store', ['id' => $item->id]) }}" method="POST">
+        <form action="{{ route('note.emojis.store', ['note' => $item->uuid]) }}" method="POST">
             @csrf
 
             <livewire:emoji-filter

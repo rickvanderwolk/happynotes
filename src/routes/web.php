@@ -15,7 +15,7 @@ Route::get('/email/verify', function () {
     return view('auth.verify-email');
 })->middleware('auth')->name('verification.notice');
 
-Route::get('/email/verify/{id}/{hash}', function (EmailVerificationRequest $request) {
+Route::get('/email/verify/{note}/{hash}', function (EmailVerificationRequest $request) {
     $request->fulfill();
     return redirect('/');
 })->middleware(['auth', 'signed'])->name('verification.verify');
@@ -35,18 +35,18 @@ Route::middleware($defaultAppMiddlewares)->group(function () {
         return view('menu');
     })->name('menu.show');
 
-    Route::get('/', [NoteController::class, 'index'])->name('dashboard');
+    Route::get('/', function () { return redirect(route('notes.show')); })->name('dashboard');
     Route::get('/notes', [NoteController::class, 'index'])->name('notes.show');
     Route::post('/notes', [NoteController::class, 'store'])->name('note.store');
     Route::get('/notes/new', [NoteController::class, 'create'])->name('note.create');
-    Route::get('/notes/{id}', [NoteController::class, 'show'])->name('note.show');
-    Route::delete('/notes/{id}', [NoteController::class, 'destroy'])->name('note.destroy');
-    Route::get('/notes/{id}/title', [NoteController::class, 'formTitle'])->name('note.title.show');
-    Route::post('/notes/{id}/title', [NoteController::class, 'storeTitle'])->name('note.title.store');
-    Route::get('/notes/{id}/emojis', [NoteController::class, 'formEmojis'])->name('note.emojis.show');
-    Route::post('/notes/{id}/emojis', [NoteController::class, 'storeEmojis'])->name('note.emojis.store');
-    Route::get('/notes/{id}/body', [NoteController::class, 'formBody'])->name('note.body.show');
-    Route::post('/notes/{id}/body', [NoteController::class, 'storeBody'])->name('note.body.store');
+    Route::get('/notes/{note}', [NoteController::class, 'show'])->name('note.show');
+    Route::delete('/notes/{note}', [NoteController::class, 'destroy'])->name('note.destroy');
+    Route::get('/notes/{note}/title', [NoteController::class, 'formTitle'])->name('note.title.show');
+    Route::post('/notes/{note}/title', [NoteController::class, 'storeTitle'])->name('note.title.store');
+    Route::get('/notes/{note}/emojis', [NoteController::class, 'formEmojis'])->name('note.emojis.show');
+    Route::post('/notes/{note}/emojis', [NoteController::class, 'storeEmojis'])->name('note.emojis.store');
+    Route::get('/notes/{note}/body', [NoteController::class, 'formBody'])->name('note.body.show');
+    Route::post('/notes/{note}/body', [NoteController::class, 'storeBody'])->name('note.body.store');
 
     Route::get('/filter', [FilterController::class, 'index'])->name('filter.show');
     Route::get('/filter/exclude', [FilterController::class, 'index'])->name('filter.exclude.show');

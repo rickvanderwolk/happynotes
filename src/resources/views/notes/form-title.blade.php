@@ -2,7 +2,7 @@
     <x-slot name="header"></x-slot>
 
     <div class="container">
-        <form action="{{ route('note.title.store', ['id' => $item->id]) }}" method="POST">
+        <form action="{{ route('note.title.store', ['note' => $item->uuid]) }}" method="POST">
             @csrf
 
             <div class="mb-3">

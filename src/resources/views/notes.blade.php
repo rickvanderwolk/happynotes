@@ -8,9 +8,9 @@
             <div id="note-list" class="list-group">
                 @foreach($notes as $note)
                     <div
-                        id="note-{{ $note->id }}"
+                        id="note-{{ $note->uuid }}"
                         class="list-group-item"
-                        onclick="window.location.href='{{ route('note.show', $note->id) }}'"
+                        onclick="window.location.href='{{ route('note.show', $note->uuid) }}'"
                         style="cursor: pointer;"
                     >
                         {{ $note->title }}

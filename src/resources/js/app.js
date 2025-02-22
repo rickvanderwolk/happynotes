@@ -26,10 +26,10 @@ function getRouteUrl(routeName, params = {}) {
     }
 }
 
-const getIdFromRoute = () => {
-    let noteId = document.querySelector(`meta[name="app-note-id"]`)?.getAttribute('content');
-    if (!isNaN(noteId)) {
-        return noteId;
+const getUuidFromRoute = () => {
+    let noteUuid = document.querySelector(`meta[name="app-note-uuid"]`)?.getAttribute('content');
+    if (noteUuid) {
+        return noteUuid;
     }
     return null;
 }
@@ -62,7 +62,11 @@ document.addEventListener('DOMContentLoaded', function () {
                 'note.title.show',
                 'note.emojis.show',
             ].includes(appCurrentRouteName)) {
-                window.location.href = getRouteUrl('note.show', {id: getIdFromRoute()});
+                window.location.href = getRouteUrl('note.show', {note: getUuidFromRoute()});
+            } else if ([
+                'note.show',
+            ].includes(appCurrentRouteName)) {
+                window.location.href = getRouteUrl('notes.show') + '#note-' + getUuidFromRoute();
             } else {
                 window.location.href = getRouteUrl('dashboard');
             }
@@ -74,7 +78,7 @@ document.addEventListener('DOMContentLoaded', function () {
                     'filter.exclude.show',
                     'filter.search.show',
                 ].includes(appCurrentRouteName)) {
-                window.location.href = getRouteUrl('dashboard')
+                window.location.href = getRouteUrl('notes.show')
             }
         }
 
@@ -96,7 +100,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 'note.title.show',
                 'note.emojis.show',
             ].includes(appCurrentRouteName)) {
-                window.location.href = getRouteUrl('note.emojis.show', {id: getIdFromRoute()});
+                window.location.href = getRouteUrl('note.emojis.show', {note: getUuidFromRoute()});
             } else {
                 window.location.href = getRouteUrl('filter.exclude.show');
             }
@@ -117,13 +121,13 @@ document.addEventListener('DOMContentLoaded', function () {
         }
 
         if (event.key === 'm') {
-            if (appCurrentRouteName === 'dashboard') {
+            if (appCurrentRouteName === 'notes.show') {
                 window.location.href = getRouteUrl('menu.show');
             }
         }
 
         if (event.key === 'n') {
-            if (appCurrentRouteName === 'dashboard') {
+            if (appCurrentRouteName === 'notes.show') {
                 window.location.href = getRouteUrl('note.create');
             }
         }
@@ -134,14 +138,14 @@ document.addEventListener('DOMContentLoaded', function () {
                 'note.title.show',
                 'note.emojis.show',
             ].includes(appCurrentRouteName)) {
-                window.location.href = getRouteUrl('note.title.show', {id: getIdFromRoute()});
+                window.location.href = getRouteUrl('note.title.show', {uuid: getUuidFromRoute()});
             }
         }
 
         if (
             event.key >= '1'
             && event.key <= '9'
-            && appCurrentRouteName === 'dashboard'
+            && appCurrentRouteName === 'notes.show'
         ) {
             let noteList = document.getElementById('note-list');
 

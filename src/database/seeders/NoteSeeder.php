@@ -11,28 +11,33 @@ class NoteSeeder extends Seeder
     public function run()
     {
         $emojis = ['😊', '✌️', '🎉', '🚀', '🔥', '🎯', '❤️', '😂', '🙌', '✨', '🌟', '🦄', '🥳', '👍', '👀'];
-        $userIds = [1, 2];
+        $users = [
+          ['id' => 1, 'first_note_uuid' => 'df6da9cb-9160-4a40-ae21-f041a79bca2c'],
+          ['id' => 2, 'first_note_uuid' => 'b161a8a7-82c3-4ef3-aab2-27aad88b0024'],
+        ];
         $notesCount = 50;
-        $noteId = 3;
 
-        foreach ($userIds as $userId) {
+        foreach ($users as $user) {
 
             for ($i = 1; $i <= $notesCount; $i++) {
+                if ($i === 1) {
+                    $noteUuid = $user['first_note_uuid'];
+                } else {
+                    $noteUuid = null;
+                }
                 $noteEmojis = array_rand(array_flip($emojis), rand(2, 7));
                 $progress = rand(1, 7) <= 5 ? null : rand(1, 100);
 
                 Note::create([
-                    'id' => $noteId,
-                    'user_id' => $userId,
-                    'title' => "Note {$i} - user {$userId}",
+                    'uuid' => $noteUuid,
+                    'user_id' => $user['id'],
+                    'title' => "Note {$i} - user {$user['id']}",
                     'body' => "Dit is de body van note {$i}.",
                     'emojis' => json_encode($noteEmojis),
                     'progress' => $progress,
                     'created_at' => now(),
                     'updated_at' => now(),
                 ]);
-
-                $noteId++;
             }
         }
     }

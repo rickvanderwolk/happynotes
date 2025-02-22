@@ -2,7 +2,7 @@
 {{--    <x-slot name="header"></x-slot>--}}
 
 {{--    <div class="container">--}}
-{{--        <form id="postForm" action="{{ route('store.body', ['id' => $item->id]) }}" method="POST">--}}
+{{--        <form id="postForm" action="{{ route('store.body', ['note' => $item->uuid]) }}" method="POST">--}}
 {{--            @csrf--}}
 {{--            <input type="hidden" id="body" name="body">--}}
 {{--            <div id="editorjs"></div>--}}

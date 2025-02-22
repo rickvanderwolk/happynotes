@@ -16,7 +16,7 @@ class ProfileExportController extends Controller
         $exportData = [];
         foreach ($notes as $note) {
             $exportData[] = [
-                'id' => $note->id,
+                'uuid' => $note->uuid,
                 'title' => $note->title,
                 'body' => json_decode($note->body, true),
                 'emojis' => $note->emojis,

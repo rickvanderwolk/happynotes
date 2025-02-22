@@ -38,12 +38,12 @@ class NoteController extends Controller
 
         $notes = $notes->orderBy('updated_at', 'DESC')->paginate(15);
 
-        return view('dashboard', compact('notes'));
+        return view('notes', compact('notes'));
     }
 
-    public function show($id)
+    public function show(Note $note)
     {
-        $note = Note::where(['id' => $id])->firstOrFail();
+        $note = Note::where(['uuid' => $note->uuid])->firstOrFail();
         $note->body = json_decode($note->body, true);
         return view('notes.show', compact('note'));
     }
@@ -77,28 +77,28 @@ class NoteController extends Controller
         return redirect()->route('dashboard');
     }
 
-    public function destroy($id)
+    public function destroy(Note $note)
     {
-        $item = Note::findOrFail($id);
+        $item = Note::where('uuid', $note->uuid)->firstOrFail();
         $item->delete();
         return redirect()->route('dashboard');
     }
 
-    public function formTitle($id)
+    public function formTitle(Note $note)
     {
-        $item = Note::find($id);
+        $item = Note::where('uuid', $note->uuid)->first();
         return view('notes.form-title', [
             'item' => $item,
         ]);
     }
 
-    public function storeTitle(Request $request, $id)
+    public function storeTitle(Request $request, Note $note)
     {
         $data = $request->validate([
             'title' => 'required|string',
         ]);
 
-        $note = Note::find($id);
+        $note = Note::where('uuid', $note->uuid)->first();
 
         $selectedEmojis = $note->emojis ?? [];
         $selectedEmojis = collect($selectedEmojis)->flatten()->unique()->values()->toArray();
@@ -110,32 +110,32 @@ class NoteController extends Controller
         $note->emojis = json_encode($selectedEmojis, JSON_UNESCAPED_UNICODE);
         $note->save();
 
-        return redirect()->route('note.show', ['id' => $id]);
+        return redirect()->route('note.show', ['uuid' => $note->uuid]);
     }
 
-    public function formEmojis($id)
+    public function formEmojis(Note $note)
     {
-        $item = Note::find($id);
+        $item = Note::where('uuid', $note->uuid)->first();
         return view('notes.form-emojis', [
             'item' => $item,
         ]);
     }
 
-    public function storeEmojis(Request $request, $id)
+    public function storeEmojis(Request $request, Note $note)
     {
-        $item = Note::find($id);
+        $item = Note::where('uuid', $note->uuid)->first();
         $selectedEmojis = json_decode($request->input('selectedEmojis', '[]'), true);
         $selectedEmojis = collect($selectedEmojis)->flatten()->unique()->values()->toArray();
         $item->emojis = json_encode($selectedEmojis, JSON_UNESCAPED_UNICODE);
         $item->save();
-        return redirect()->route('note.show', ['id' => $id]);
+        return redirect()->route('note.show', ['uuid' => $note->uuid]);
     }
 
-    public function storeBody(Request $request, $id)
+    public function storeBody(Request $request, Note $note)
     {
         $body = $request->input('body');
 
-        $note = Note::find($id);
+        $note = Note::where('uuid', $note->uuid)->first();
 
         if (empty($body)) {
             $note->body = null;
@@ -158,6 +158,6 @@ class NoteController extends Controller
 
         $note->save();
 
-        return redirect()->route('note.show', ['id' => $id]);
+        return redirect()->route('note.show', ['uuid' => $note->uuid]);
     }
 }
