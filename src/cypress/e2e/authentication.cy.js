@@ -16,14 +16,14 @@ describe('Authentication Tests', () => {
     it('Should successfully log in with valid credentials (as user 1)', () => {
         const user = Cypress.env("users").user1;
         cy.login(user.email, user.password);
-        cy.url().should('eq', `${Cypress.config('baseUrl')}/`);
+        cy.url().should('eq', `${Cypress.config('baseUrl')}/notes`);
         cy.get('[data-cy="the-navbar"]').should('exist');
     });
 
     it('Should successfully log in with valid credentials (as user 2)', () => {
         const user = Cypress.env("users").user2;
         cy.login(user.email, user.password);
-        cy.url().should('eq', `${Cypress.config('baseUrl')}/`);
+        cy.url().should('eq', `${Cypress.config('baseUrl')}/notes`);
         cy.get('[data-cy="the-navbar"]').should('exist');
     });
 });
