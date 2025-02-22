@@ -36,7 +36,7 @@ Route::middleware($defaultAppMiddlewares)->group(function () {
     })->name('menu.show');
 
     Route::get('/', [NoteController::class, 'index'])->name('dashboard');
-    Route::get('/notes', [NoteController::class, 'index'])->name('notes.show');
+    Route::get('/notes', function () { return redirect(route('dashboard')); })->name('notes.show');
     Route::post('/notes', [NoteController::class, 'store'])->name('note.store');
     Route::get('/notes/new', [NoteController::class, 'create'])->name('note.create');
     Route::get('/notes/{note}', [NoteController::class, 'show'])->name('note.show');
