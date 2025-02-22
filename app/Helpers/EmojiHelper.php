@@ -10,7 +10,7 @@ class EmojiHelper
     public static function getEmojisFromString(string $string): array {
         $matches = [];
 
-        if (preg_match_all(self::EMOJI_REGEX, $string, $matches) === false) {
+        if (preg_match_all(self::EMOJI_REGEX_IGNORE_NUMBERS, $string, $matches) === false) {
             return [];
         }
 
