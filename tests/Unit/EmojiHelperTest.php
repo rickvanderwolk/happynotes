@@ -2,13 +2,14 @@
 
 namespace Tests\Unit;
 
+use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
 use App\Helpers\EmojiHelper;
 
 class EmojiHelperTest extends TestCase
 {
-    /** @test */
-    public function it_extracts_emojis_from_string(): void
+    #[Test]
+    public function testExtractsEmojisFromString(): void
     {
         $string = "Hello world 😊🌍!";
         $result = EmojiHelper::getEmojisFromString($string);
@@ -16,8 +17,8 @@ class EmojiHelperTest extends TestCase
         $this->assertEquals(['😊', '🌍'], $result);
     }
 
-    /** @test */
-    public function it_returns_empty_array_when_no_emojis_are_present(): void
+    #[Test]
+    public function testReturnsEmptyArrayWhenNoEmojisArePresent(): void
     {
         $string = "Hello world!";
         $result = EmojiHelper::getEmojisFromString($string);
@@ -25,8 +26,8 @@ class EmojiHelperTest extends TestCase
         $this->assertEquals([], $result);
     }
 
-    /** @test */
-    public function it_handles_duplicate_emojis_correctly(): void
+    #[Test]
+    public function testHandlesDuplicateEmojisCorrectly(): void
     {
         $string = "😊😊🌍🌍";
         $result = EmojiHelper::getEmojisFromString($string);
@@ -34,8 +35,8 @@ class EmojiHelperTest extends TestCase
         $this->assertEquals(['😊', '🌍'], $result);
     }
 
-    /** @test */
-    public function it_removes_emojis_from_string(): void
+    #[Test]
+    public function testRemovesEmojisFromString(): void
     {
         $string = "Hey 👋🐸!";
         $result = EmojiHelper::getStringWithoutEmojis($string);
@@ -43,8 +44,8 @@ class EmojiHelperTest extends TestCase
         $this->assertEquals("Hey !", $result);
     }
 
-    /** @test */
-    public function it_retains_numbers_in_string(): void
+    #[Test]
+    public function testRetainsNumbersInString(): void
     {
         $string = "Score: 100 🎉";
         $result = EmojiHelper::getStringWithoutEmojis($string);
@@ -52,8 +53,8 @@ class EmojiHelperTest extends TestCase
         $this->assertEquals("Score: 100 ", $result);
     }
 
-    /** @test */
-    public function it_handles_string_with_only_emojis(): void
+    #[Test]
+    public function testHandlesStringWithOnlyEmojis(): void
     {
         $string = "💯🔥😎";
         $result = EmojiHelper::getStringWithoutEmojis($string);
@@ -61,8 +62,8 @@ class EmojiHelperTest extends TestCase
         $this->assertEquals("", $result);
     }
 
-    /** @test */
-    public function it_returns_original_string_if_no_emojis_are_present(): void
+    #[Test]
+    public function testReturnsOriginalStringIfNoEmojisArePresent(): void
     {
         $string = "Hello world!";
         $result = EmojiHelper::getStringWithoutEmojis($string);
@@ -70,8 +71,8 @@ class EmojiHelperTest extends TestCase
         $this->assertEquals($string, $result);
     }
 
-    /** @test */
-    public function it_extracts_emojis_but_not_plain_numbers(): void
+    #[Test]
+    public function testExtractsEmojisButNotPlainNumbers(): void
     {
         $string = "I have 3 apples 🍏 and 1️⃣ banana 🍌.";
         $result = EmojiHelper::getEmojisFromString($string);
@@ -79,8 +80,8 @@ class EmojiHelperTest extends TestCase
         $this->assertEquals(['🍏', '1️⃣', '🍌'], $result);
     }
 
-    /** @test */
-    public function it_removes_emojis_but_keeps_plain_numbers(): void
+    #[Test]
+    public function testRemovesEmojisButKeepsPlainNumbers(): void
     {
         $string = "Level 10️⃣ reached in 3 days!";
         $result = EmojiHelper::getStringWithoutEmojis($string);
@@ -88,8 +89,8 @@ class EmojiHelperTest extends TestCase
         $this->assertEquals("Level 10 reached in 3 days!", $result);
     }
 
-    /** @test */
-    public function it_does_not_extract_plain_numbers_as_emojis(): void
+    #[Test]
+    public function testDoesNotExtractPlainNumbersAsEmojis(): void
     {
         $string = "123 456 789";
         $result = EmojiHelper::getEmojisFromString($string);
@@ -97,8 +98,8 @@ class EmojiHelperTest extends TestCase
         $this->assertEmpty($result);
     }
 
-    /** @test */
-    public function it_correctly_handles_keycap_emojis(): void
+    #[Test]
+    public function testCorrectlyHandlesKeycapEmojis(): void
     {
         $string = "Top 3️⃣ players: 1️⃣ Alice, 2️⃣ Bob, 3️⃣ Charlie.";
         $result = EmojiHelper::getEmojisFromString($string);
@@ -106,8 +107,8 @@ class EmojiHelperTest extends TestCase
         $this->assertEquals(['3️⃣', '1️⃣', '2️⃣'], $result);
     }
 
-    /** @test */
-    public function it_removes_keycap_emojis_but_keeps_text(): void
+    #[Test]
+    public function testRemovesKeycapEmojisButKeepsText(): void
     {
         $string = "Ranking: 1️⃣ Alice, 2️⃣ Bob, 3️⃣ Charlie.";
         $result = EmojiHelper::getStringWithoutEmojis($string);
