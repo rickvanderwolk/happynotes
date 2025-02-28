@@ -2,21 +2,35 @@
 
 namespace App\Livewire;
 
+use App\Models\Note;
 use Livewire\Component;
 
 class ProgressBar extends Component
 {
-    public $percentage = 0;
+    public $idNote = null;
+    public $progress = null;
 
-    public function mount($percentage = 0)
+    protected $listeners = ['noteUpdated' => 'updateProgress'];
+
+    public function mount($idNote = null)
     {
-        $this->percentage = $percentage;
+        $this->idNote = $idNote;
+        $this->updateProgress();
+    }
+
+    public function updateProgress()
+    {
+        $note = Note::find($this->idNote);
+        if ($note) {
+            $this->progress = $note->progress;
+            $this->render();
+        }
     }
 
     public function render()
     {
         return view('livewire.progress-bar', [
-            'percentage' => $this->percentage,
+            'progress' => $this->progress,
         ]);
     }
 }

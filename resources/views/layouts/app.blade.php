@@ -20,7 +20,7 @@
     <link rel="manifest" href="/site.webmanifest" />
 
     <!-- Scripts -->
-    @vite(['resources/css/app.scss', 'resources/js/app.js'])
+    @vite(['resources/css/app.scss', 'resources/js/app.js', 'resources/js/editor.js'])
 
     <!-- Styles -->
     @livewireStyles
