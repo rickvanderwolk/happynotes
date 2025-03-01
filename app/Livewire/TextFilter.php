@@ -26,6 +26,7 @@ class TextFilter extends Component
         $user = Auth::user();
         if ($user) {
             $user->update(['search_query' => $this->search_query]);
+            $this->dispatch('filterUpdated');
         }
     }
 
@@ -34,6 +35,7 @@ class TextFilter extends Component
         $user = Auth::user();
         if ($user) {
             $user->update(['search_query_only' => $this->search_query_only]);
+            $this->dispatch('filterUpdated');
         }
     }
 

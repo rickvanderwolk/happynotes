@@ -76,6 +76,7 @@ class EmojiFilter extends Component
         }
 
         $this->dispatch('emojisChanged', [$this->emojis]);
+        $this->dispatch('filterUpdated');
     }
 
     public function deselectEmoji($emoji)
@@ -88,6 +89,7 @@ class EmojiFilter extends Component
             ]);
         }
         $this->dispatch('emojisChanged', [$this->emojis]);
+        $this->dispatch('filterUpdated');
     }
 
     public function deselectAll()
@@ -100,6 +102,7 @@ class EmojiFilter extends Component
             ]);
         }
         $this->dispatch('emojisChanged', [$this->emojis]);
+        $this->dispatch('filterUpdated');
     }
 
     public function getSelectableEmojis()

@@ -20,7 +20,8 @@
     <link rel="manifest" href="/site.webmanifest" />
 
     <!-- Scripts -->
-    @vite(['resources/css/app.scss', 'resources/js/app.js', 'resources/js/editor.js'])
+    @vite(['resources/css/app.scss', 'resources/js/app.js'])
+{{--    @vite(['resources/css/app.scss', 'resources/js/app.js', 'resources/js/editor.js'])--}}
 
     <!-- Styles -->
     @livewireStyles
@@ -48,17 +49,7 @@
         <div class="col-12 col-sm-11 col-md-10 col-lg-9 col-xl-6 ms-auto me-auto">
             <div class="row">
                 <div class="col-12 p-0">
-                    @php
-                        $selectedEmojis = optional(Auth::user())->selected_emojis ?? [];
-                        $excludedEmojis = optional(Auth::user())->excluded_emojis ?? [];
-                        $searchQuery = optional(Auth::user())->search_query ?? null;
-                    @endphp
-
-                    <livewire:test-menu
-                        :selectedEmojis="$selectedEmojis"
-                        :excludedEmojis="$excludedEmojis"
-                        :searchQuery="$searchQuery"
-                    />
+                    <livewire:test-menu />
                 </div>
                 <div class="col-12">
                     <main>

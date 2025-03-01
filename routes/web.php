@@ -3,6 +3,7 @@
 use App\Http\Controllers\FilterController;
 use App\Http\Controllers\NoteController;
 use App\Http\Controllers\ProfileExportController;
+use App\Http\Middleware\StoreOriginalRoute;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Foundation\Auth\EmailVerificationRequest;
 use Illuminate\Http\Request;
@@ -29,6 +30,7 @@ $defaultAppMiddlewares = ['auth:sanctum', config('jetstream.auth_session')];
 if (config('app.force_email_verification')) {
     $defaultAppMiddlewares[] = 'verified';
 }
+$defaultAppMiddlewares[] = StoreOriginalRoute::class;
 
 Route::middleware($defaultAppMiddlewares)->group(function () {
     Route::get('/menu', function () {
