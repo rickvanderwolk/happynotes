@@ -8,9 +8,7 @@
                     <h1 onclick="window.location.href='{{ route('note.title.show', ['note' => $note->uuid]) }}'">{{ $note->title }}</h1>
                 </div>
                 <div class="col-12">
-                    @if($note->progress)
-                        <livewire:progress-bar :percentage="$note->progress" />
-                    @endif
+                    <livewire:progress-bar :idNote="$note->id" />
                 </div>
                 <div onclick="window.location.href='{{ route('note.emojis.show', ['note' => $note->uuid]) }}'" class="emoji-wrapper emoji-wrapper-left">
                     @foreach($note->emojis as $emojiIndex => $emoji)

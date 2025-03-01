@@ -16,7 +16,7 @@
                         {{ $note->title }}
 
                         @if($note->progress)
-                            <livewire:progress-bar :percentage="$note->progress" />
+                            <livewire:progress-bar :idNote="$note->id" />
                         @endif
 
                         @if(!empty($note->emojis))

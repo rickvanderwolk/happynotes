@@ -4,7 +4,7 @@
         <div class="row">
             <div class="col-12 col-md-12 ms-auto me-auto">
                 @php
-                    $currentRouteName = request()->route()->getName();
+                    $currentRouteName = session('original_route_name', '');
                     $note = request()->route('note');
                     $uuidFromRoute = is_object($note) ? $note->uuid : (is_array($note) ? $note['uuid'] : null);
                 @endphp
@@ -16,10 +16,12 @@
                         <div class="col-12 d-flex justify-content-between">
                             @if(request()->routeIs( 'note.show'))
                                 <h3 class="emoji-wrapper">
-                                    <form action="{{ route('note.destroy', ['note' => $uuidFromRoute]) }}" method="POST">
+                                    <form action="{{ route('note.destroy', ['note' => $uuidFromRoute]) }}"
+                                          method="POST">
                                         @csrf
                                         @method('DELETE')
-                                        <button type="submit" onclick="return confirm('Are you sure you want to delete this note?')">
+                                        <button type="submit"
+                                                onclick="return confirm('Are you sure you want to delete this note?')">
                                             <i class="fa fa-trash-can"></i>
                                         </button>
                                     </form>
@@ -67,7 +69,8 @@
                         <div class="col-8 d-flex justify-content-end">
                             <h3 class="emoji-wrapper">
                                 @if(count($selectedEmojis ?? []) > 0)
-                                    <a href="{{ route('filter.show') }}" class="{{ request()->is('filter') ? 'active' : '' }}">
+                                    <a href="{{ route('filter.show') }}"
+                                       class="{{ request()->is('filter') ? 'active' : '' }}">
                                         @foreach(array_slice($selectedEmojis, 0, 3) as $emoji)
                                             <span class="emoji">{{ $emoji }}</span>
                                         @endforeach
@@ -97,31 +100,35 @@
                     <div class="row">
                         <div class="col-12 d-flex justify-content-between">
                             <h3 class="emoji-wrapper">
-                                <a href="{{ route('filter.show') }}" class="{{ request()->routeIs('filter.show') ? 'active' : '' }}">
+                                <a href="{{ route('filter.show') }}" class="{{ $currentRouteName === 'filter.show' ? 'active' : '' }}">
                                     <div class="position-relative d-inline-block">
                                         <i class="fa fa-filter"></i>
                                         @if(count($selectedEmojis) > 0)
-                                            <span class="position-absolute top-0 start-100 translate-middle p-1 bg-secondary border border-light rounded-circle notifiation-badge">
+                                            <span
+                                                class="position-absolute top-0 start-100 translate-middle p-1 bg-secondary border border-light rounded-circle notifiation-badge">
                                                 <span class="visually-hidden">New notifications</span>
                                             </span>
                                         @endif
                                     </div>
                                 </a>
-                                <a href="{{ route('filter.exclude.show') }}" class="{{ request()->routeIs('filter.exclude.show') ? 'active' : '' }}">
+                                <a href="{{ route('filter.exclude.show') }}" class="{{ $currentRouteName === 'filter.exclude.show' ? 'active' : '' }}">
                                     <div class="position-relative d-inline-block">
                                         <i class="fa fa-ban"></i>
                                         @if(count($excludedEmojis) > 0)
-                                            <span class="position-absolute top-0 start-100 translate-middle p-1 bg-secondary border border-light rounded-circle notifiation-badge">
+                                            <span
+                                                class="position-absolute top-0 start-100 translate-middle p-1 bg-secondary border border-light rounded-circle notifiation-badge">
                                                 <span class="visually-hidden">New notifications</span>
                                             </span>
                                         @endif
                                     </div>
                                 </a>
-                                <a href="{{ route('filter.search.show') }}" class="{{ request()->routeIs('filter.search.show') ? 'active' : '' }}">
+                                <a href="{{ route('filter.search.show') }}"
+                                   class="{{ $currentRouteName === 'filter.search.show' ? 'active' : '' }}">
                                     <div class="position-relative d-inline-block">
                                         <i class="fa fa-search"></i>
                                         @if(!empty($searchQuery))
-                                            <span class="position-absolute top-0 start-100 translate-middle p-1 bg-secondary border border-light rounded-circle notifiation-badge">
+                                            <span
+                                                class="position-absolute top-0 start-100 translate-middle p-1 bg-secondary border border-light rounded-circle notifiation-badge">
                                                 <span class="visually-hidden">New notifications</span>
                                             </span>
                                         @endif
@@ -135,8 +142,6 @@
                             </h3>
                         </div>
                     </div>
-
-
 
                 @else
                     <div class="row">
