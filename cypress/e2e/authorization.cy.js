@@ -1,5 +1,4 @@
 describe('Authorization Tests', () => {
-
     it('User 1 should be able to see User 1’s notes', () => {
         const user = Cypress.env("users").user1;
         cy.login(user.email, user.password);

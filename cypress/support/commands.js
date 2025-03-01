@@ -1,6 +1,5 @@
 Cypress.Commands.add('login', (email, password) => {
     cy.log('Wait between tests to prevent 429 - Too Many Requests (rate limiting)')
-    cy.wait(5000);
     cy.visit('/login');
     cy.get('[name="email"]').type(email);
     cy.get('[name="password"]').type(password);
