@@ -61,7 +61,7 @@
                                 <a href="{{ route('menu.show') }}" class="{{ request()->is('menu') ? 'active' : '' }}">
                                     <i class="fa fa-bars"></i>
                                 </a>
-                                <a href="{{ route('note.create') }}" class="{{ request()->is('new') ? 'active' : '' }}">
+                                <a data-cy="create-new-note" href="{{ route('note.create') }}" class="{{ request()->is('new') ? 'active' : '' }}">
                                     <i class="fa fa-plus"></i>
                                 </a>
                             </h3>

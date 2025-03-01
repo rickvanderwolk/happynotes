@@ -5,10 +5,11 @@
 
     <div>
         @if(isset($notes) && $notes->count() > 0)
-            <div id="note-list" class="list-group">
+            <div id="note-list" data-cy="note-list" class="list-group">
                 @foreach($notes as $note)
                     <div
                         id="note-{{ $note->uuid }}"
+                        data-cy="note-list-item"
                         class="list-group-item"
                         onclick="window.location.href='{{ route('note.show', $note->uuid) }}'"
                         style="cursor: pointer;"
@@ -20,7 +21,7 @@
                         @endif
 
                         @if(!empty($note->emojis))
-                            <div class="emoji-wrapper">
+                            <div data-cy="emoji-wrapper" class="emoji-wrapper">
                                 @foreach($note->emojis as $emoji)
                                     <span class="emoji">{{ $emoji }}</span>
                                 @endforeach
