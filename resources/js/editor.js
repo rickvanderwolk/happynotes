@@ -37,7 +37,27 @@ const editor = new EditorJS({
         },
         list: {
             class: List,
-            inlineToolbar: true
+            inlineToolbar: true,
+            /**
+             * Workaround for disabling checklist option from @editorjs/list (as we already use checklist from @editorjs/checklist).
+             * Not disabling it results in two checklist instances in the toolbox.
+             * Additionally, the current note progress bar is only compatible with the @editorjs/checklist plugin.
+             * @see GitHub issue / workaround https://github.com/editor-js/list/issues/119
+             */
+            toolbox: [
+                {
+                    title: 'Ordered List',
+                    data: {
+                        style: 'ordered',
+                    }
+                },
+                {
+                    title: 'Unordered List',
+                    data: {
+                        style: 'unordered',
+                    }
+                }
+            ]
         },
         code: {
             class: Code,
