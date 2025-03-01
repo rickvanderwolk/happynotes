@@ -14,7 +14,7 @@
             <input type="hidden" name="selectedEmojis" id="selectedEmojis">
 
             <div class="d-grid gap-2" style="position: fixed; bottom: 20px; left: 50%; transform: translateX(-50%); width: auto; max-width: 400px;">
-                <button type="submit" class="btn btn-success">Save Note</button>
+                <button data-cy="save-note-emojis" type="submit" class="btn btn-success">Save Note</button>
             </div>
         </form>
     </div>

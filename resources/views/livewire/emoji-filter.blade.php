@@ -12,7 +12,7 @@
             <hr>
         @endif
 
-        <div class="row text-center">
+        <div data-cy="emoji-filter-emoji-selector" class="row text-center">
             @foreach($selectableEmojis as $emoji)
                 <span class="emoji col-2 text-center" wire:click="selectEmoji('{{ $emoji }}')" style="cursor: pointer;">
                     {{ $emoji }}

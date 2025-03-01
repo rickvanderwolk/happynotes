@@ -20,7 +20,7 @@
                                           method="POST">
                                         @csrf
                                         @method('DELETE')
-                                        <button type="submit"
+                                        <button data-cy="delete-note" type="submit"
                                                 onclick="return confirm('Are you sure you want to delete this note?')">
                                             <i class="fa fa-trash-can"></i>
                                         </button>
@@ -61,7 +61,7 @@
                                 <a href="{{ route('menu.show') }}" class="{{ request()->is('menu') ? 'active' : '' }}">
                                     <i class="fa fa-bars"></i>
                                 </a>
-                                <a href="{{ route('note.create') }}" class="{{ request()->is('new') ? 'active' : '' }}">
+                                <a data-cy="create-new-note" href="{{ route('note.create') }}" class="{{ request()->is('new') ? 'active' : '' }}">
                                     <i class="fa fa-plus"></i>
                                 </a>
                             </h3>
