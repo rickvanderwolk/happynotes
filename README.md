@@ -4,9 +4,9 @@
 _A note-taking app for ~~chaotic~~ free-spirited minds 💥🧠📝🎨🚀_
 
 <p>
-  <img src="public/images/screenshot-1-notes-list.png" width="30%" />
-  <img src="public/images/screenshot-2-filter.png" width="30%" />
-  <img src="public/images/screenshot-3-note.png" width="30%" />
+  <img src="public/images/screenshot-1-notes-list.png" width="30%" style="border: 1px solid #d1d9e0b3;"/>
+  <img src="public/images/screenshot-2-filter.png" width="30%" style="border: 1px solid #d1d9e0b3;" />
+  <img src="public/images/screenshot-3-note.png" width="30%" style="border: 1px solid #d1d9e0b3;" />
 </p>
 
 ## What 📝
