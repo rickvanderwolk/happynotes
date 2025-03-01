@@ -1,6 +1,6 @@
 Cypress.Commands.add('login', (email, password) => {
     cy.log('Wait between tests to prevent 429 - Too Many Requests (rate limiting)')
-    cy.wait(2500);
+    cy.wait(5000);
     cy.visit('/login');
     cy.get('[name="email"]').type(email);
     cy.get('[name="password"]').type(password);
@@ -15,6 +15,6 @@ Cypress.Commands.add('selectFirstSelectableEmoji', () => {
             const emojiText = $emoji.text().trim();
             cy.wrap($emoji).click();
             cy.wait(500);
-            return cy.wrap(emojiText); // Cypress vereist dat we een cy-wrap gebruiken voor asynchrone terugkeer
+            return cy.wrap(emojiText);
         });
 });
