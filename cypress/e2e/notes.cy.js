@@ -53,4 +53,14 @@ describe("Notes Tests", () => {
         cy.reload();
         cy.get('[data-cy="note-body"]').should("contain.text", bodyText);
     });
+
+    it("Delete note", () => {
+        cy.get('[data-cy="note-list"] [data-cy="note-list-item"]').first().as("firstNote");
+        cy.get("@firstNote").invoke("text").then((deletedNoteText) => {
+            cy.get("@firstNote").click();
+            cy.get('[data-cy="delete-note"]').click();
+            cy.on("window:confirm", () => true);
+            cy.get('[data-cy="note-list"] [data-cy="note-list-item"]').first().invoke("text").should("not.eq", deletedNoteText);
+        });
+    });
 });
