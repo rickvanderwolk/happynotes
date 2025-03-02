@@ -20,7 +20,12 @@ fresh:
 
 analyse:
 	@echo "🧪 Analyse code..."
+	vendor/bin/phpcs --standard=PSR12 app/
 	php -d memory_limit=-1 vendor/bin/phpstan analyse
+
+autofix:
+	@echo "🤖 Auto fix code..."
+	vendor/bin/php-cs-fixer fix app/
 
 test:
 	@echo "🧪 Running tests..."
