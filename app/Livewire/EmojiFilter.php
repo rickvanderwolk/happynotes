@@ -55,10 +55,10 @@ class EmojiFilter extends Component
         $excluded = $excluded ?? [];
 
         if ($this->storageKey === 'selected_emojis') {
-            $excluded = array_filter($excluded, fn($e) => $e !== $emoji);
+            $excluded = array_filter($excluded, fn ($e) => $e !== $emoji);
             $this->emojis[] = $emoji;
         } elseif ($this->storageKey === 'excluded_emojis') {
-            $selected = array_filter($selected, fn($e) => $e !== $emoji);
+            $selected = array_filter($selected, fn ($e) => $e !== $emoji);
             $this->emojis[] = $emoji;
         } else {
             $this->emojis[] = $emoji;
@@ -81,7 +81,7 @@ class EmojiFilter extends Component
 
     public function deselectEmoji($emoji)
     {
-        $this->emojis = array_filter($this->emojis, fn($e) => $e !== $emoji);
+        $this->emojis = array_filter($this->emojis, fn ($e) => $e !== $emoji);
 
         if ($this->updateUser && $this->storageKey) {
             Auth::user()->update([
@@ -119,7 +119,7 @@ class EmojiFilter extends Component
         $selected = $selected ?? [];
         $excluded = $excluded ?? [];
 
-        return array_filter($this->allEmojis, function($emoji) use ($selected, $excluded) {
+        return array_filter($this->allEmojis, function ($emoji) use ($selected, $excluded) {
             if ($this->storageKey === 'selected_emojis' || $this->storageKey === 'excluded_emojis') {
                 return ! in_array($emoji, $selected) && ! in_array($emoji, $excluded);
             }

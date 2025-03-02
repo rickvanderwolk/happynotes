@@ -48,7 +48,7 @@ class Note extends Model
 
     protected static function booted()
     {
-        static::addGlobalScope(new OwnNotesScope);
+        static::addGlobalScope(new OwnNotesScope());
     }
 
     public function getRouteKeyName()

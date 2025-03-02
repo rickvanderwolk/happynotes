@@ -7,22 +7,22 @@ class ProgressHelper
     public static function getProgressFromNoteBody(array $body): ?float
     {
         $progress = null;
-        if(!empty($body['blocks'])) {
+        if (!empty($body['blocks'])) {
             $totalCheckboxes = 0;
             $checkedCheckboxes = 0;
-            foreach($body['blocks'] as $block) {
-                if(isset($block['type']) && $block['type'] === 'checklist') {
-                    if(isset($block['data']['items']) && is_array($block['data']['items'])) {
-                        foreach($block['data']['items'] as $note) {
+            foreach ($body['blocks'] as $block) {
+                if (isset($block['type']) && $block['type'] === 'checklist') {
+                    if (isset($block['data']['items']) && is_array($block['data']['items'])) {
+                        foreach ($block['data']['items'] as $note) {
                             $totalCheckboxes++;
-                            if(isset($note['checked']) && $note['checked'] === true) {
+                            if (isset($note['checked']) && $note['checked'] === true) {
                                 $checkedCheckboxes++;
                             }
                         }
                     }
                 }
             }
-            if($totalCheckboxes > 0) {
+            if ($totalCheckboxes > 0) {
                 $progress = round(($checkedCheckboxes / $totalCheckboxes) * 100);
             }
         }

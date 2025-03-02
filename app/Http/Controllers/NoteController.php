@@ -144,7 +144,7 @@ class NoteController extends Controller
             $selectedEmojis = $note->emojis ?? [];
             $selectedEmojis = collect($selectedEmojis)->flatten()->unique()->values()->toArray();
             if (!empty($body['blocks'])) {
-                $bodyContent = array_map(fn($block) => $block['data']['text'] ?? '', $body['blocks']);
+                $bodyContent = array_map(fn ($block) => $block['data']['text'] ?? '', $body['blocks']);
                 $bodyContent = implode(" ", $bodyContent);
                 $emojisInBody = EmojiHelper::getEmojisFromString($bodyContent);
                 $selectedEmojis = array_merge($selectedEmojis, $emojisInBody);

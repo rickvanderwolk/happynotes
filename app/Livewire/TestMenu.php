@@ -14,12 +14,14 @@ class TestMenu extends Component
 
     protected $listeners = ['filterUpdated' => 'updateFilter'];
 
-    public function mount() {
+    public function mount()
+    {
         $this->originalRoute = session('original_route_name', request()->route()->getName());
         $this->updateFilter();
     }
 
-    public function updateFilter() {
+    public function updateFilter()
+    {
         $user = Auth::user();
         $selectedEmojis = $user->selected_emojis ?? [];
         $excludedEmojis = $user->excluded_emojis ?? [];
