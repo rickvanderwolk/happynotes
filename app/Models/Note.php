@@ -56,15 +56,6 @@ class Note extends Model
         return 'uuid';
     }
 
-    private function getUserId()
-    {
-        $user = Auth::user();
-        if (empty($user)) {
-            throw new \Exception('Not logged in');
-        }
-        return $user->id;
-    }
-
     public function updateUserEmojis()
     {
         $userId = $this->user_id;
@@ -92,24 +83,6 @@ class Note extends Model
     public function user()
     {
         return $this->belongsTo(User::class);
-    }
-
-    private function getAll(): array
-    {
-        $notes = $this->select(['id', 'title', 'emojis'])
-            ->orderBy('updated_at', 'DESC')
-            ->get()
-            ->toArray();
-
-        if (empty($notes)) {
-            return [];
-        }
-
-        foreach ($notes as $key => $note) {
-            $notes[$key]['emojis'] = json_decode($note['emojis'], true);
-        }
-
-        return $notes;
     }
 
     public function getEmojisAttribute($value)

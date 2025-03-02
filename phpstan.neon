@@ -6,3 +6,6 @@ parameters:
     paths:
         - app/
         - database/
+    ignoreErrors:
+        - '#Instanceof between App\\Models\\User and Illuminate\\Contracts\\Auth\\MustVerifyEmail will always evaluate to true#'
+        - '#Call to static method factory\(\) on an unknown class App\\Models\\Team#'

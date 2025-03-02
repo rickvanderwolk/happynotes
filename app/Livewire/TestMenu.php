@@ -10,6 +10,7 @@ class TestMenu extends Component
     public $selectedEmojis = [];
     public $excludedEmojis = [];
     public $searchQuery = null;
+    public $originalRoute = null;
 
     protected $listeners = ['filterUpdated' => 'updateFilter'];
 
