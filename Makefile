@@ -1,4 +1,4 @@
-.PHONY: install update serve fresh test build
+.PHONY: install update serve fresh analyse test build
 
 install:
 	@echo "🔧 Installing dependencies..."
@@ -17,6 +17,10 @@ serve:
 fresh:
 	@echo "🗑️  Resetting database..."
 	php artisan migrate:fresh --seed
+
+analyse:
+	@echo "🧪 Analyse code..."
+	php -d memory_limit=-1 vendor/bin/phpstan analyse
 
 test:
 	@echo "🧪 Running tests..."
