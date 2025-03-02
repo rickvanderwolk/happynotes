@@ -22,6 +22,7 @@ audit:
 	@echo "🔒 Audit..."
 	composer audit
 	npm audit
+	vendor/bin/security-checker security:check
 
 analyse:
 	@echo "🧪 Analyse code..."
