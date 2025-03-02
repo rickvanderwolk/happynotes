@@ -64,7 +64,7 @@ class NoteController extends Controller
         $selectedEmojis = collect($selectedEmojis)->flatten()->unique()->values()->toArray();
 
         $emojisInTitle = EmojiHelper::getEmojisFromString($data['title']);
-        $selectedEmojis = array_merge($selectedEmojis ?? [], $emojisInTitle);
+        $selectedEmojis = array_merge($selectedEmojis, $emojisInTitle);
 
         $selectedEmojis = array_unique($selectedEmojis);
 
@@ -103,7 +103,7 @@ class NoteController extends Controller
         $selectedEmojis = $note->emojis ?? [];
         $selectedEmojis = collect($selectedEmojis)->flatten()->unique()->values()->toArray();
         $emojisInTitle = EmojiHelper::getEmojisFromString($data['title']);
-        $selectedEmojis = array_merge($selectedEmojis ?? [], $emojisInTitle);
+        $selectedEmojis = array_merge($selectedEmojis, $emojisInTitle);
         $selectedEmojis = array_unique($selectedEmojis);
 
         $note->title = EmojiHelper::getStringWithoutEmojis($data['title']);
@@ -144,10 +144,10 @@ class NoteController extends Controller
             $selectedEmojis = $note->emojis ?? [];
             $selectedEmojis = collect($selectedEmojis)->flatten()->unique()->values()->toArray();
             if (!empty($body['blocks'])) {
-                $bodyContent = array_map(fn($block) => $block['data']['text'] ?? '', $body['blocks']);
+                $bodyContent = array_map(fn ($block) => $block['data']['text'] ?? '', $body['blocks']);
                 $bodyContent = implode(" ", $bodyContent);
                 $emojisInBody = EmojiHelper::getEmojisFromString($bodyContent);
-                $selectedEmojis = array_merge($selectedEmojis ?? [], $emojisInBody);
+                $selectedEmojis = array_merge($selectedEmojis, $emojisInBody);
             }
             $selectedEmojis = array_unique($selectedEmojis);
 

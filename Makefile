@@ -1,4 +1,4 @@
-.PHONY: install update serve fresh test build
+.PHONY: install update serve fresh audit analyse test build
 
 install:
 	@echo "🔧 Installing dependencies..."
@@ -17,6 +17,21 @@ serve:
 fresh:
 	@echo "🗑️  Resetting database..."
 	php artisan migrate:fresh --seed
+
+audit:
+	@echo "🔒 Audit..."
+	composer audit
+	npm audit
+	vendor/bin/security-checker security:check
+
+analyse:
+	@echo "🧪 Analyse code..."
+	vendor/bin/phpcs --standard=PSR12 app/
+	php -d memory_limit=-1 vendor/bin/phpstan analyse
+
+autofix:
+	@echo "🤖 Auto fix code..."
+	vendor/bin/php-cs-fixer fix app/
 
 test:
 	@echo "🧪 Running tests..."

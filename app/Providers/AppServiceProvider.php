@@ -30,8 +30,11 @@ class AppServiceProvider extends ServiceProvider
             RateLimiter::for('global', fn () => Limit::none());
             RateLimiter::for('api', fn () => Limit::none());
             RateLimiter::for('web', fn () => Limit::none());
-            app()->bind(ThrottleRequests::class, fn() => new class {
-                public function handle($request, Closure $next) { return $next($request); }
+            app()->bind(ThrottleRequests::class, fn () => new class () {
+                public function handle($request, Closure $next)
+                {
+                    return $next($request);
+                }
             });
         }
     }
