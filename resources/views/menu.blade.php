@@ -7,6 +7,12 @@
                     <i class="fa fa-up-right-from-square"></i>
                 </li>
             </a>
+            <a href="https://github.com/rickvanderwolk/happynotes" target="_blank" rel="noopener noreferrer" data-turbolinks="false">
+                <li class="list-group-item text-center">
+                    About
+                    <i class="fa fa-up-right-from-square"></i>
+                </li>
+            </a>
             <li class="list-group-item text-center">
                 <form method="POST" action="{{ route('logout') }}" style="display: inline;">
                     @csrf

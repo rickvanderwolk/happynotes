@@ -150,9 +150,19 @@
                                 <!-- Leeg voor andere routes zonder specifieke actie -->
                             </h3>
                             <h3 class="emoji-wrapper">
-                                <a href="{{ url('/') }}" class="{{ request()->is('/') ? 'active' : '' }}">
-                                    <i class="fa fa-close"></i>
-                                </a>
+                                @if($uuidFromRoute !== null)
+                                    <h3 class="emoji-wrapper">
+                                        <a href="{{ route('note.show', ['note' => $uuidFromRoute]) }}">
+                                            <i class="fa fa-close"></i>
+                                        </a>
+                                    </h3>
+                                @else
+                                    <h3 class="emoji-wrapper">
+                                        <a href="{{ url('/') }}">
+                                            <i class="fa fa-close"></i>
+                                        </a>
+                                    </h3>
+                                @endif
                             </h3>
                         </div>
                     </div>
