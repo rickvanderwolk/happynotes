@@ -38,9 +38,9 @@
 <meta name="app-route-menu-show" content="{{ route('menu.show') }}">
 <meta name="app-route-notes-show" content="{{ route('notes.show') }}">
 <meta name="app-route-note-create" content="{{ route('note.create') }}">
-<meta name="app-route-note-show" content="{{ route('note.show', ':id') }}">
-<meta name="app-route-note-title-show" content="{{ route('note.title.show', ':id') }}">
-<meta name="app-route-note-emojis-show" content="{{ route('note.emojis.show', ':id') }}">
+<meta name="app-route-note-show" content="{{ route('note.show', ':note') }}">
+<meta name="app-route-note-title-show" content="{{ route('note.title.show', ':note') }}">
+<meta name="app-route-note-emojis-show" content="{{ route('note.emojis.show', ':note') }}">
 <meta name="app-route-profile-show" content="{{ route('profile.show',) }}">
 
 <div id="app" class="container">
