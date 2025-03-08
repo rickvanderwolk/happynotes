@@ -23,7 +23,6 @@ class SecurityHeadersMiddleware
         if (app()->environment('production')) {
             $headers['Cross-Origin-Opener-Policy'] = 'same-origin';
             $headers['Cross-Origin-Resource-Policy'] = 'same-origin';
-            $headers['Content-Security-Policy'] = "default-src 'self'; script-src 'self'; style-src 'self'; frame-ancestors 'none';";
             $headers['X-Permitted-Cross-Domain-Policies'] = 'none';
         }
 
