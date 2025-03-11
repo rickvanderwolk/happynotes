@@ -32,19 +32,19 @@
 
                             @if(Str::contains($currentRouteName, 'form.'))
                                 <h3 class="emoji-wrapper">
-                                    <a href="{{ route('note.show', ['note' => $uuidFromRoute]) }}">
+                                    <a href="{{ route('note.show', ['note' => $uuidFromRoute]) }}" aria-label="Close">
                                         <i class="fa fa-close"></i>
                                     </a>
                                 </h3>
                             @elseif($uuidFromRoute !== null)
                                 <h3 class="emoji-wrapper">
-                                    <a href="{{ url("/#note-{$uuidFromRoute}") }}">
+                                    <a href="{{ url("/#note-{$uuidFromRoute}") }}" aria-label="Close">
                                         <i class="fa fa-close"></i>
                                     </a>
                                 </h3>
                             @else
                                 <h3 class="emoji-wrapper">
-                                    <a href="{{ url('/') }}">
+                                    <a href="{{ url('/') }}" aria-label="Close">
                                         <i class="fa fa-close"></i>
                                     </a>
                                 </h3>
@@ -58,10 +58,10 @@
                     <div class="row">
                         <div class="col-4 d-flex justify-content-start">
                             <h3 class="emoji-wrapper">
-                                <a href="{{ route('menu.show') }}" class="{{ request()->is('menu') ? 'active' : '' }}">
+                                <a href="{{ route('menu.show') }}" class="{{ request()->is('menu') ? 'active' : '' }}" aria-label="Menu">
                                     <i class="fa fa-bars"></i>
                                 </a>
-                                <a data-cy="create-new-note" href="{{ route('note.create') }}" class="{{ request()->is('new') ? 'active' : '' }}">
+                                <a data-cy="create-new-note" href="{{ route('note.create') }}" class="{{ request()->is('new') ? 'active' : '' }}" aria-label="New note">
                                     <i class="fa fa-plus"></i>
                                 </a>
                             </h3>
@@ -69,8 +69,7 @@
                         <div class="col-8 d-flex justify-content-end">
                             <h3 class="emoji-wrapper">
                                 @if(count($selectedEmojis ?? []) > 0)
-                                    <a href="{{ route('filter.show') }}"
-                                       class="{{ request()->is('filter') ? 'active' : '' }}">
+                                    <a href="{{ route('filter.show') }}" class="{{ request()->is('filter') ? 'active' : '' }}" aria-label="Filter">
                                         @foreach(array_slice($selectedEmojis, 0, 3) as $emoji)
                                             <span class="emoji">{{ $emoji }}</span>
                                         @endforeach
@@ -79,7 +78,7 @@
                                         @endif
                                     </a>
                                 @else
-                                    <a href="{{ route('filter.show') }}" class="{{ request()->is('filter') ? 'active' : '' }}">
+                                    <a href="{{ route('filter.show') }}" class="{{ request()->is('filter') ? 'active' : '' }}" aria-label="Filter">
                                         <div class="position-relative d-inline-block">
                                             <i class="fa fa-filter"></i>
 {{--                                            @if(count($excludedEmojis) > 0 || !empty($searchQuery))--}}
@@ -100,7 +99,7 @@
                     <div class="row">
                         <div class="col-12 d-flex justify-content-between">
                             <h3 class="emoji-wrapper">
-                                <a href="{{ route('filter.show') }}" class="{{ $currentRouteName === 'filter.show' ? 'active' : '' }}">
+                                <a href="{{ route('filter.show') }}" class="{{ $currentRouteName === 'filter.show' ? 'active' : '' }}" aria-label="Filter - include emojis">
                                     <div class="position-relative d-inline-block">
                                         <i class="fa fa-filter"></i>
                                         @if(count($selectedEmojis) > 0)
@@ -111,7 +110,7 @@
                                         @endif
                                     </div>
                                 </a>
-                                <a href="{{ route('filter.exclude.show') }}" class="{{ $currentRouteName === 'filter.exclude.show' ? 'active' : '' }}">
+                                <a href="{{ route('filter.exclude.show') }}" class="{{ $currentRouteName === 'filter.exclude.show' ? 'active' : '' }}" aria-label="Filter - exclude emojis">
                                     <div class="position-relative d-inline-block">
                                         <i class="fa fa-ban"></i>
                                         @if(count($excludedEmojis) > 0)
@@ -122,8 +121,7 @@
                                         @endif
                                     </div>
                                 </a>
-                                <a href="{{ route('filter.search.show') }}"
-                                   class="{{ $currentRouteName === 'filter.search.show' ? 'active' : '' }}">
+                                <a href="{{ route('filter.search.show') }}" class="{{ $currentRouteName === 'filter.search.show' ? 'active' : '' }}" aria-label="Filter - Text">
                                     <div class="position-relative d-inline-block">
                                         <i class="fa fa-search"></i>
                                         @if(!empty($searchQuery))
@@ -136,7 +134,7 @@
                                 </a>
                             </h3>
                             <h3 class="emoji-wrapper">
-                                <a href="{{ url('/') }}" class="{{ request()->is('/') ? 'active' : '' }}">
+                                <a href="{{ url('/') }}" class="{{ request()->is('/') ? 'active' : '' }}" aria-label="Close">
                                     <i class="fa fa-close"></i>
                                 </a>
                             </h3>
@@ -152,13 +150,13 @@
                             <h3 class="emoji-wrapper">
                                 @if($uuidFromRoute !== null)
                                     <h3 class="emoji-wrapper">
-                                        <a href="{{ route('note.show', ['note' => $uuidFromRoute]) }}">
+                                        <a href="{{ route('note.show', ['note' => $uuidFromRoute]) }}" aria-label="Close">
                                             <i class="fa fa-close"></i>
                                         </a>
                                     </h3>
                                 @else
                                     <h3 class="emoji-wrapper">
-                                        <a href="{{ url('/') }}">
+                                        <a href="{{ url('/') }}" aria-label="Close">
                                             <i class="fa fa-close"></i>
                                         </a>
                                     </h3>
