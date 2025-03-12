@@ -14,10 +14,8 @@
         <meta name="apple-mobile-web-app-title" content="happynotes" />
         <link rel="manifest" href="/site.webmanifest" />
 
-        <!-- Scripts -->
-        @vite(['resources/css/account.scss'])
-
         <!-- Styles -->
+        @vite(['resources/css/account.scss'])
         @livewireStyles
     </head>
     <body>
@@ -31,6 +29,7 @@
             </div>
         </div>
 
+        <!-- Styles -->
         @livewireScripts
     </body>
 </html>

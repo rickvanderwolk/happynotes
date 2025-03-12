@@ -14,10 +14,8 @@
         <meta name="apple-mobile-web-app-title" content="happynotes" />
         <link rel="manifest" href="/site.webmanifest" />
 
-        <!-- Scripts -->
-        @vite(['resources/css/guest.scss'])
-
         <!-- Styles -->
+        @vite(['resources/css/guest.scss'])
         @livewireStyles
     </head>
     <body>
@@ -25,6 +23,7 @@
             {{ $slot }}
         </div>
 
+        <!-- Scripts -->
         @livewireScripts
     </body>
 </html>
