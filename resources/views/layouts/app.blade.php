@@ -45,7 +45,7 @@
                 <div class="col-12 col-sm-11 col-md-10 col-lg-9 col-xl-6 ms-auto me-auto">
                     <div class="row">
                         <div class="col-12 p-0">
-                            <livewire:test-menu />
+                            <livewire:navbar />
                         </div>
                         <div class="col-12">
                             <main>

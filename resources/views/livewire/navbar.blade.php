@@ -1,5 +1,4 @@
-{{-- resources/views/components/dynamic-navbar.blade.php --}}
-<div id="main-navbar" class="the-navbar" data-cy="the-navbar">
+<div id="main-navbar" class="main-navbar" data-cy="main-navbar">
     <div class="container-fluid">
         <div class="row">
             <div class="col-12 col-md-12 ms-auto me-auto">
@@ -9,9 +8,7 @@
                     $uuidFromRoute = is_object($note) ? $note->uuid : (is_array($note) ? $note['uuid'] : null);
                 @endphp
 
-
-
-            @if((request()->routeIs( 'note.show')))
+                @if((request()->routeIs( 'note.show')))
                     <div class="row">
                         <div class="col-12 d-flex justify-content-between">
                             @if(request()->routeIs( 'note.show'))
@@ -52,8 +49,6 @@
                         </div>
                     </div>
 
-
-
                 @elseif((request()->routeIs( 'notes.show')))
                     <div class="row">
                         <div class="col-4 d-flex justify-content-start">
@@ -81,19 +76,12 @@
                                     <a href="{{ route('filter.show') }}" class="{{ request()->is('filter') ? 'active' : '' }}" aria-label="Filter">
                                         <div class="position-relative d-inline-block">
                                             <i class="fa fa-filter"></i>
-{{--                                            @if(count($excludedEmojis) > 0 || !empty($searchQuery))--}}
-{{--                                                <span class="position-absolute top-0 start-100 translate-middle p-1 bg-secondary border border-light rounded-circle notifiation-badge">--}}
-{{--                                                    <span class="visually-hidden">New notifications</span>--}}
-{{--                                                </span>--}}
-{{--                                            @endif--}}
                                         </div>
                                     </a>
                                 @endif
                             </h3>
                         </div>
                     </div>
-
-
 
                 @elseif(Str::contains($currentRouteName, 'filter'))
                     <div class="row">
@@ -165,8 +153,6 @@
                         </div>
                     </div>
                 @endif
-
-
 
             </div>
         </div>

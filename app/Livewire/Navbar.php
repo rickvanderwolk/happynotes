@@ -5,7 +5,7 @@ namespace app\Livewire;
 use Illuminate\Support\Facades\Auth;
 use Livewire\Component;
 
-class TestMenu extends Component
+class Navbar extends Component
 {
     public $selectedEmojis = [];
     public $excludedEmojis = [];
@@ -42,7 +42,7 @@ class TestMenu extends Component
 
     public function render()
     {
-        return view('livewire.test-menu', [
+        return view('livewire.navbar', [
             'selectedEmojis' => $this->selectedEmojis,
             'excludedEmojis' => $this->excludedEmojis,
             'searchQuery' => $this->searchQuery,
