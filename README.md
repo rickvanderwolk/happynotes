@@ -18,7 +18,7 @@ No note-taking app ever felt natural to me. I tried paper, various apps, and oth
 ## How to use 🚀
 You can run Happy Notes yourself. If you’re familiar with Laravel, it should be pretty easy to set up. Maybe one day I’ll write a guide—but honestly, this is my first Laravel project, so you might already know more than I do.
 
-Not into self-hosting? No worries! You can use the [hosted version](https://happynotes.cc) for free, and since I don’t expect a large user base, that’s not changing anytime soon. If it ever does, I’ll figure something out. Either way, your notes are yours—you can always export them (via `account` > `export data`) and run your own instance from this repo.
+Not into self-hosting? No worries! You can use the [hosted version](https://happynotes.cc) for free (hosted in the Netherlands, EU), and since I don’t expect a large user base, that’s not changing anytime soon. If it ever does, I’ll figure something out. Either way, your notes are yours—you can always export them (currently as CSV or JSON) via `account` > `export data` and run your own instance from this repo.
 
 ## Issues & PR's 🧩
 Happy Notes is a personal side, side project. Mainly build for myself and shared as is. I would truly appreciate any ideas, issues, and / or PRs, but I’ll only work on what fits my vision and time. It’s fully open source, so if I’m too slow—or if you have your different ideas—feel free to fork it and make it yours 😊 If you’d like to contribute, pull requests are always welcome! 💛
