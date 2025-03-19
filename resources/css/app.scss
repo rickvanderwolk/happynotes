@@ -209,6 +209,10 @@ a .list-group-item {
     left: 35px !important;
 }
 
+#note-saved-indicator {
+    display: none;
+}
+
 @media (prefers-color-scheme: dark) {
     :root {
         --bg-color: #000;

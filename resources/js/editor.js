@@ -18,8 +18,17 @@ const autoSave = () => {
                 'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content')
             },
             body: JSON.stringify({ body: outputData })
-        }).then(response => {
-            Livewire.dispatch('noteUpdated');
+        }).then(response => response.json()) // Convert response to JSON
+            .then(data => {
+                if (data.success) {
+                    Livewire.dispatch('noteUpdated');
+                    showIndicator('note-saved-indicator', true);
+                } else {
+                    showIndicator('note-saved-indicator', false);
+                }
+            })
+            .catch(() => {
+                showIndicator('note-saved-indicator', false);
         })
     })
 }
@@ -75,3 +84,29 @@ const editor = new EditorJS({
         autoSave()
     }
 })
+
+/**
+ * Toont het juiste icoontje op basis van succes of fout
+ * @param {string} indicatorId - ID van het HTML-element
+ * @param {boolean} isSuccess - True voor succes, False voor fout
+ */
+function showIndicator(indicatorId, isSuccess) {
+    const indicator = document.getElementById(indicatorId);
+
+    if (indicator) {
+        indicator.style.display = 'inline-block';
+        indicator.style.opacity = 1;
+        if (!isSuccess) {
+            indicator.style.color = 'red';
+        }
+
+        setTimeout(() => {
+            indicator.style.transition = 'opacity 1s';
+            indicator.style.opacity = 0;
+
+            setTimeout(() => {
+                indicator.style.display = 'none';
+            }, 500);
+        }, 1000);
+    }
+}

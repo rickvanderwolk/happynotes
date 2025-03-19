@@ -38,6 +38,7 @@
                                 </h3>
                             @elseif($uuidFromRoute !== null)
                                 <h3 class="emoji-wrapper">
+                                    <i id="note-saved-indicator" class="fa fa-floppy-disk"></i>
                                     <a href="{{ url("/#note-{$uuidFromRoute}") }}" aria-label="Close">
                                         <i class="fa fa-close"></i>
                                     </a>
@@ -134,6 +135,7 @@
                                 </a>
                             </h3>
                             <h3 class="emoji-wrapper">
+                                <i id="note-saved-indicator" class="fa fa-floppy-disk"></i>
                                 <a href="{{ url('/') }}" class="{{ request()->is('/') ? 'active' : '' }}" aria-label="Close">
                                     <i class="fa fa-close"></i>
                                 </a>

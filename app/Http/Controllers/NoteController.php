@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Helpers\EmojiHelper;
 use app\Helpers\ProgressHelper;
 use App\Models\Note;
+use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -133,31 +134,39 @@ class NoteController extends Controller
 
     public function storeBody(Request $request, Note $note)
     {
-        $body = $request->input('body');
+        try {
+            $body = $request->input('body');
 
-        $note = Note::where('uuid', $note->uuid)->first();
+            $note = Note::where('uuid', $note->uuid)->firstOrFail();
 
-        if (empty($body)) {
-            $note->body = null;
-            $note->progress = null;
-        } else {
-            $selectedEmojis = $note->emojis ?? [];
-            $selectedEmojis = collect($selectedEmojis)->flatten()->unique()->values()->toArray();
-            if (!empty($body['blocks'])) {
-                $bodyContent = array_map(fn ($block) => $block['data']['text'] ?? '', $body['blocks']);
-                $bodyContent = implode(" ", $bodyContent);
-                $emojisInBody = EmojiHelper::getEmojisFromString($bodyContent);
-                $selectedEmojis = array_merge($selectedEmojis, $emojisInBody);
+            if (empty($body)) {
+                $note->body = null;
+                $note->progress = null;
+            } else {
+                $selectedEmojis = $note->emojis ?? [];
+                $selectedEmojis = collect($selectedEmojis)->flatten()->unique()->values()->toArray();
+                if (!empty($body['blocks'])) {
+                    $bodyContent = array_map(fn ($block) => $block['data']['text'] ?? '', $body['blocks']);
+                    $bodyContent = implode(" ", $bodyContent);
+                    $emojisInBody = EmojiHelper::getEmojisFromString($bodyContent);
+                    $selectedEmojis = array_merge($selectedEmojis, $emojisInBody);
+                }
+                $selectedEmojis = array_unique($selectedEmojis);
+
+                $note->body = json_encode($body, JSON_UNESCAPED_UNICODE);
+                $note->emojis = json_encode($selectedEmojis, JSON_UNESCAPED_UNICODE);
+                $note->progress = ProgressHelper::getProgressFromNoteBody($body);
             }
-            $selectedEmojis = array_unique($selectedEmojis);
 
-            $note->body = json_encode($body, JSON_UNESCAPED_UNICODE);
-            $note->emojis = json_encode($selectedEmojis, JSON_UNESCAPED_UNICODE);
-            $note->progress = ProgressHelper::getProgressFromNoteBody($body);
+            $note->save();
+
+            return response()->json([
+                'success' => true,
+            ]);
+        } catch (Exception $e) {
+            return response()->json([
+                'success' => false,
+            ], 500);
         }
-
-        $note->save();
-
-        return redirect()->route('note.show', ['note' => $note->uuid]);
     }
 }
