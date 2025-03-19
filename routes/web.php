@@ -47,7 +47,6 @@ Route::middleware($defaultAppMiddlewares)->group(function () {
     Route::post('/notes/{note}/title', [NoteController::class, 'storeTitle'])->name('note.title.store');
     Route::get('/notes/{note}/emojis', [NoteController::class, 'formEmojis'])->name('note.emojis.show');
     Route::post('/notes/{note}/emojis', [NoteController::class, 'storeEmojis'])->name('note.emojis.store');
-    Route::get('/notes/{note}/body', [NoteController::class, 'formBody'])->name('note.body.show');
     Route::post('/notes/{note}/body', [NoteController::class, 'storeBody'])->name('note.body.store');
 
     Route::get('/filter', [FilterController::class, 'index'])->name('filter.show');

@@ -243,7 +243,8 @@ a .list-group-item {
     input.form-control:focus,
     textarea.form-control,
     textarea.form-control:focus,
-    hr {
+    hr,
+    .emoji-wrapper {
         background-color: var(--bg-color);
         color: var(--text-color);
         border-color: var(--border-color);
