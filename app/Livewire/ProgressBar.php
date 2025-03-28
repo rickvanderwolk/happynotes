@@ -3,6 +3,7 @@
 namespace App\Livewire;
 
 use App\Models\Note;
+use Illuminate\Contracts\View\View;
 use Livewire\Component;
 
 final class ProgressBar extends Component
@@ -27,7 +28,7 @@ final class ProgressBar extends Component
         }
     }
 
-    public function render(): \Illuminate\View\View|\Illuminate\Contracts\View\View
+    public function render(): View
     {
         return view('livewire.progress-bar', [
             'progress' => $this->progress,

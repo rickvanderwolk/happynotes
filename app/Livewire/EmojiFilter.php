@@ -2,6 +2,7 @@
 
 namespace App\Livewire;
 
+use Illuminate\Contracts\View\View;
 use Illuminate\Support\Facades\Auth;
 use Livewire\Component;
 
@@ -130,7 +131,7 @@ final class EmojiFilter extends Component
         });
     }
 
-    public function render(): \Illuminate\View\View|\Illuminate\Contracts\View\View
+    public function render(): View
     {
         return view('livewire.emoji-filter', [
             'selectableEmojis' => $this->getSelectableEmojis(),

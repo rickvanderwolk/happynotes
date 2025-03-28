@@ -2,6 +2,7 @@
 
 namespace App\Livewire;
 
+use Illuminate\Contracts\View\View;
 use Illuminate\Support\Facades\Auth;
 use Livewire\Component;
 
@@ -39,7 +40,7 @@ final class TextFilter extends Component
         }
     }
 
-    public function render(): \Illuminate\View\View|\Illuminate\Contracts\View\View
+    public function render(): View
     {
         return view('livewire.text-filter', [
             'search_query' => $this->search_query,

@@ -2,6 +2,7 @@
 
 namespace app\Livewire;
 
+use Illuminate\Contracts\View\View;
 use Illuminate\Support\Facades\Auth;
 use Livewire\Component;
 
@@ -40,7 +41,7 @@ final class Navbar extends Component
         $this->render();
     }
 
-    public function render(): \Illuminate\View\View|\Illuminate\Contracts\View\View
+    public function render(): \Illuminate\View\View|View
     {
         return view('livewire.navbar', [
             'selectedEmojis' => $this->selectedEmojis,
