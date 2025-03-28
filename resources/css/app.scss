@@ -272,4 +272,9 @@ a .list-group-item {
         color: var(--link-color);
         border-color: var(--border-color);
     }
+
+    #menu .list-group-item,
+    #menu .list-group-item form button {
+        color: var(--text-color) !important;
+    }
 }
