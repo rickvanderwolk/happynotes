@@ -12,7 +12,7 @@ use Illuminate\Support\Facades\Auth;
 
 final class NoteController extends Controller
 {
-    public function index(): View
+    public function index(): \Illuminate\View\View|View
     {
         $user = Auth::user();
         $selectedEmojis = json_decode(Auth::user()->selected_emojis, true) ?? [];
@@ -43,14 +43,14 @@ final class NoteController extends Controller
         return view('notes', compact('notes'));
     }
 
-    public function show(Note $note): View
+    public function show(Note $note): \Illuminate\View\View|View
     {
         $note = Note::where(['uuid' => $note->uuid])->firstOrFail();
         $note->body = json_decode($note->body, true);
         return view('notes.show', compact('note'));
     }
 
-    public function create(): View
+    public function create(): \Illuminate\View\View|View
     {
         return view('new');
     }
@@ -86,7 +86,7 @@ final class NoteController extends Controller
         return redirect()->route('dashboard');
     }
 
-    public function formTitle(Note $note): View
+    public function formTitle(Note $note): \Illuminate\View\View|View
     {
         $item = Note::where('uuid', $note->uuid)->first();
         return view('notes.form-title', [
@@ -115,7 +115,7 @@ final class NoteController extends Controller
         return redirect()->route('note.show', ['note' => $note->uuid]);
     }
 
-    public function formEmojis(Note $note): View
+    public function formEmojis(Note $note): \Illuminate\View\View|View
     {
         $item = Note::where('uuid', $note->uuid)->first();
         return view('notes.form-emojis', [

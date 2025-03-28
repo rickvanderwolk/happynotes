@@ -28,7 +28,7 @@ final class ProgressBar extends Component
         }
     }
 
-    public function render(): View
+    public function render(): \Illuminate\View\View|View
     {
         return view('livewire.progress-bar', [
             'progress' => $this->progress,

@@ -6,12 +6,12 @@ use Illuminate\Contracts\View\View;
 
 final class FilterController extends Controller
 {
-    public function index(): View
+    public function index(): \Illuminate\View\View|View
     {
         return view('filter');
     }
 
-    public function search(): View
+    public function search(): \Illuminate\View\View|View
     {
         return view('search');
     }

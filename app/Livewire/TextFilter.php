@@ -40,7 +40,7 @@ final class TextFilter extends Component
         }
     }
 
-    public function render(): View
+    public function render(): \Illuminate\View\View|View
     {
         return view('livewire.text-filter', [
             'search_query' => $this->search_query,

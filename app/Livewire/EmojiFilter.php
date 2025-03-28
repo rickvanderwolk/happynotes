@@ -131,7 +131,7 @@ final class EmojiFilter extends Component
         });
     }
 
-    public function render(): View
+    public function render(): \Illuminate\View\View|View
     {
         return view('livewire.emoji-filter', [
             'selectableEmojis' => $this->getSelectableEmojis(),
