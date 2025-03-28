@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Helpers\EmojiHelper;
-use app\Helpers\ProgressHelper;
+use App\Helpers\ProgressHelper;
 use App\Models\Note;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\RedirectResponse;
