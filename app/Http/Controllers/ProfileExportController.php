@@ -5,10 +5,11 @@ namespace App\Http\Controllers;
 use App\Models\Note;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Response;
+use Symfony\Component\HttpFoundation\StreamedResponse;
 
 final class ProfileExportController extends Controller
 {
-    public function export(Request $request): \Illuminate\Http\JsonResponse|\Symfony\Component\HttpFoundation\StreamedResponse
+    public function export(Request $request): \Illuminate\Http\JsonResponse|StreamedResponse
     {
         $format = $request->query('format', 'json');
         $notes = Note::all();

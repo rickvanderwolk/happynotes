@@ -5,6 +5,7 @@ namespace App\Models;
 use App\Scopes\OwnNotesScope;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Str;
 
@@ -84,9 +85,11 @@ final class Note extends Model
     }
 
     /**
-     * @psalm-return \Illuminate\Database\Eloquent\Relations\BelongsTo<User>
+     * @return BelongsTo<User, self>
+     * @psalm-return BelongsTo<User>
+     * @phpstan-return BelongsTo<User, self>
      */
-    public function user(): \Illuminate\Database\Eloquent\Relations\BelongsTo
+    public function user(): BelongsTo
     {
         return $this->belongsTo(User::class);
     }
