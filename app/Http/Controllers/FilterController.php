@@ -2,14 +2,14 @@
 
 namespace App\Http\Controllers;
 
-class FilterController extends Controller
+final class FilterController extends Controller
 {
-    public function index()
+    public function index(): \Illuminate\View\View|\Illuminate\Contracts\View\View
     {
         return view('filter');
     }
 
-    public function search()
+    public function search(): \Illuminate\View\View|\Illuminate\Contracts\View\View
     {
         return view('search');
     }

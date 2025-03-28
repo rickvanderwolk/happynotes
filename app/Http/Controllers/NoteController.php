@@ -8,9 +8,9 @@ use App\Models\Note;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
-class NoteController extends Controller
+final class NoteController extends Controller
 {
-    public function index()
+    public function index(): \Illuminate\View\View|\Illuminate\Contracts\View\View
     {
         $user = Auth::user();
         $selectedEmojis = json_decode(Auth::user()->selected_emojis, true) ?? [];
@@ -41,19 +41,19 @@ class NoteController extends Controller
         return view('notes', compact('notes'));
     }
 
-    public function show(Note $note)
+    public function show(Note $note): \Illuminate\View\View|\Illuminate\Contracts\View\View
     {
         $note = Note::where(['uuid' => $note->uuid])->firstOrFail();
         $note->body = json_decode($note->body, true);
         return view('notes.show', compact('note'));
     }
 
-    public function create()
+    public function create(): \Illuminate\View\View|\Illuminate\Contracts\View\View
     {
         return view('new');
     }
 
-    public function store(Request $request)
+    public function store(Request $request): \Illuminate\Http\RedirectResponse
     {
         $data = $request->validate([
             'title' => 'required|string',
@@ -77,14 +77,14 @@ class NoteController extends Controller
         return redirect()->route('dashboard');
     }
 
-    public function destroy(Note $note)
+    public function destroy(Note $note): \Illuminate\Http\RedirectResponse
     {
         $item = Note::where('uuid', $note->uuid)->firstOrFail();
         $item->delete();
         return redirect()->route('dashboard');
     }
 
-    public function formTitle(Note $note)
+    public function formTitle(Note $note): \Illuminate\View\View|\Illuminate\Contracts\View\View
     {
         $item = Note::where('uuid', $note->uuid)->first();
         return view('notes.form-title', [
@@ -92,7 +92,7 @@ class NoteController extends Controller
         ]);
     }
 
-    public function storeTitle(Request $request, Note $note)
+    public function storeTitle(Request $request, Note $note): \Illuminate\Http\RedirectResponse
     {
         $data = $request->validate([
             'title' => 'required|string',
@@ -113,7 +113,7 @@ class NoteController extends Controller
         return redirect()->route('note.show', ['note' => $note->uuid]);
     }
 
-    public function formEmojis(Note $note)
+    public function formEmojis(Note $note): \Illuminate\View\View|\Illuminate\Contracts\View\View
     {
         $item = Note::where('uuid', $note->uuid)->first();
         return view('notes.form-emojis', [
@@ -121,7 +121,7 @@ class NoteController extends Controller
         ]);
     }
 
-    public function storeEmojis(Request $request, Note $note)
+    public function storeEmojis(Request $request, Note $note): \Illuminate\Http\RedirectResponse
     {
         $item = Note::where('uuid', $note->uuid)->first();
         $selectedEmojis = json_decode($request->input('selectedEmojis', '[]'), true);
@@ -131,7 +131,7 @@ class NoteController extends Controller
         return redirect()->route('note.show', ['note' => $note->uuid]);
     }
 
-    public function storeBody(Request $request, Note $note)
+    public function storeBody(Request $request, Note $note): \Illuminate\Http\RedirectResponse
     {
         $body = $request->input('body');
 

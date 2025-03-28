@@ -5,14 +5,14 @@ namespace App\Livewire;
 use Illuminate\Support\Facades\Auth;
 use Livewire\Component;
 
-class EmojiFilter extends Component
+final class EmojiFilter extends Component
 {
     public $allEmojis = [];
     public $emojis = [];
     public $storageKey;
     public $updateUser = false;
 
-    public function mount($storageKey = null, $updateUser = false, $customEmojis = [])
+    public function mount($storageKey = null, $updateUser = false, $customEmojis = []): void
     {
         $this->storageKey = $storageKey;
         $this->updateUser = $updateUser;
@@ -36,6 +36,9 @@ class EmojiFilter extends Component
         }
     }
 
+    /**
+     * @return void
+     */
     public function selectEmoji($emoji)
     {
         if (in_array($emoji, $this->emojis)) {
@@ -79,7 +82,7 @@ class EmojiFilter extends Component
         $this->dispatch('filterUpdated');
     }
 
-    public function deselectEmoji($emoji)
+    public function deselectEmoji($emoji): void
     {
         $this->emojis = array_filter($this->emojis, fn ($e) => $e !== $emoji);
 
@@ -92,7 +95,7 @@ class EmojiFilter extends Component
         $this->dispatch('filterUpdated');
     }
 
-    public function deselectAll()
+    public function deselectAll(): void
     {
         $this->emojis = [];
 
@@ -105,7 +108,7 @@ class EmojiFilter extends Component
         $this->dispatch('filterUpdated');
     }
 
-    public function getSelectableEmojis()
+    public function getSelectableEmojis(): array
     {
         $user = Auth::user();
 
@@ -127,7 +130,7 @@ class EmojiFilter extends Component
         });
     }
 
-    public function render()
+    public function render(): \Illuminate\View\View|\Illuminate\Contracts\View\View
     {
         return view('livewire.emoji-filter', [
             'selectableEmojis' => $this->getSelectableEmojis(),

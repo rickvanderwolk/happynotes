@@ -6,9 +6,9 @@ use Illuminate\Database\Seeder;
 use App\Models\Note;
 use Illuminate\Support\Facades\DB;
 
-class NoteSeeder extends Seeder
+final class NoteSeeder extends Seeder
 {
-    public function run()
+    public function run(): void
     {
         $emojis = ['🎉', '👋', '✨', '🫶', '😊', '✌️', '🚀', '🔥', '😘', '🦄', '🎉', '👍', '🎨', '🍀', '😻', '⭐️', '🤫', '🏖', '🌎', '🧘'];
         $users = [

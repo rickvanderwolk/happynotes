@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Str;
 
-class Note extends Model
+final class Note extends Model
 {
     use HasFactory;
 
@@ -27,6 +27,7 @@ class Note extends Model
     ];
     public $timestamps = true;
 
+    #[\Override]
     protected static function boot()
     {
         parent::boot();
@@ -46,17 +47,19 @@ class Note extends Model
         });
     }
 
+    #[\Override]
     protected static function booted()
     {
         static::addGlobalScope(new OwnNotesScope());
     }
 
+    #[\Override]
     public function getRouteKeyName()
     {
         return 'uuid';
     }
 
-    public function updateUserEmojis()
+    public function updateUserEmojis(): void
     {
         $userId = $this->user_id;
         $user = User::find($userId);
@@ -80,7 +83,10 @@ class Note extends Model
         }
     }
 
-    public function user()
+    /**
+     * @psalm-return \Illuminate\Database\Eloquent\Relations\BelongsTo<User>
+     */
+    public function user(): \Illuminate\Database\Eloquent\Relations\BelongsTo
     {
         return $this->belongsTo(User::class);
     }

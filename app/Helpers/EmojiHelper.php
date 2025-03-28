@@ -2,7 +2,7 @@
 
 namespace App\Helpers;
 
-class EmojiHelper
+final class EmojiHelper
 {
     /**
      * Determines if a single Unicode code point is an emoji (excluding digits).
