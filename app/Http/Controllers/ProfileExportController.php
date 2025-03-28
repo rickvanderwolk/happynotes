@@ -46,7 +46,16 @@ final class ProfileExportController extends Controller
             ]);
         }
 
-        return response()->json(['error' => 'Invalid format'], 400);
+        return tap(Response::streamDownload(function () {
+            echo json_encode(
+                ['error' => 'Invalid format'],
+                JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES | JSON_PRETTY_PRINT
+            );
+        }, 'error.json', [
+            'Content-Type' => 'application/json',
+        ]), function ($response) {
+            $response->setStatusCode(400);
+        });
     }
 
     /**
