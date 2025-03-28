@@ -8,10 +8,10 @@ use Livewire\Component;
 
 final class Navbar extends Component
 {
-    public $selectedEmojis = [];
-    public $excludedEmojis = [];
-    public $searchQuery = null;
-    public $originalRoute = null;
+    public array $selectedEmojis = [];
+    public array $excludedEmojis = [];
+    public ?string $searchQuery = null;
+    public ?string $originalRoute = null;
 
     protected $listeners = ['filterUpdated' => 'updateFilter'];
 
