@@ -11,7 +11,7 @@ use Illuminate\Http\Request;
  * When livewire is updated the route name will become "livewire.update".
  * As a workaround we use the session to store the "original" route name for now.
  */
-class StoreOriginalRoute
+final class StoreOriginalRoute
 {
     public function handle(Request $request, Closure $next)
     {

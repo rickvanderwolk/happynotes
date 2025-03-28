@@ -26,7 +26,9 @@
         "nunomaduro/collision": "^8.1",
         "phpstan/phpstan": "^2.1",
         "phpunit/phpunit": "^11.5",
-        "squizlabs/php_codesniffer": "^3.11"
+        "psalm/plugin-laravel": "^3.0",
+        "squizlabs/php_codesniffer": "^3.11",
+        "vimeo/psalm": "^6.9"
     },
     "autoload": {
         "psr-4": {

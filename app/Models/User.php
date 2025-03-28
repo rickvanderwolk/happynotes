@@ -11,7 +11,7 @@ use Laravel\Fortify\TwoFactorAuthenticatable;
 use Laravel\Jetstream\HasProfilePhoto;
 use Laravel\Sanctum\HasApiTokens;
 
-class User extends Authenticatable implements MustVerifyEmail
+final class User extends Authenticatable implements MustVerifyEmail
 {
     use HasApiTokens;
 
@@ -42,6 +42,7 @@ class User extends Authenticatable implements MustVerifyEmail
         'profile_photo_url',
     ];
 
+    #[\Override]
     protected function casts(): array
     {
         return [
@@ -50,6 +51,7 @@ class User extends Authenticatable implements MustVerifyEmail
         ];
     }
 
+    #[\Override]
     protected static function booted()
     {
         static::created(function ($user) {
@@ -67,12 +69,12 @@ class User extends Authenticatable implements MustVerifyEmail
         });
     }
 
-    public function setSelectedEmojisAttribute($value)
+    public function setSelectedEmojisAttribute($value): void
     {
         $this->attributes['selected_emojis'] = json_encode($value, JSON_UNESCAPED_UNICODE);
     }
 
-    public function setExcludedEmojisAttribute($value)
+    public function setExcludedEmojisAttribute($value): void
     {
         $this->attributes['excluded_emojis'] = json_encode($value, JSON_UNESCAPED_UNICODE);
     }

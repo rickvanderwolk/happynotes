@@ -5,10 +5,11 @@ namespace App\Http\Controllers;
 use App\Models\Note;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Response;
+use Symfony\Component\HttpFoundation\StreamedResponse;
 
-class ProfileExportController extends Controller
+final class ProfileExportController extends Controller
 {
-    public function export(Request $request)
+    public function export(Request $request): \Illuminate\Http\JsonResponse|StreamedResponse
     {
         $format = $request->query('format', 'json');
         $notes = Note::all();
@@ -48,7 +49,10 @@ class ProfileExportController extends Controller
         return response()->json(['error' => 'Invalid format'], 400);
     }
 
-    private function convertToCsv(array $data)
+    /**
+     * @return false|string
+     */
+    private function convertToCsv(array $data): string|false
     {
         if (empty($data)) {
             return "No data available\n";

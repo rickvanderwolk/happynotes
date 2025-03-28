@@ -4,9 +4,9 @@ namespace App\Livewire;
 
 use Livewire\Component;
 
-class ExportUserDataForm extends Component
+final class ExportUserDataForm extends Component
 {
-    public function render()
+    public function render(): \Illuminate\View\View|\Illuminate\Contracts\View\View
     {
         return view('livewire.export-user-data-form');
     }

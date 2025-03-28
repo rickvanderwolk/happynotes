@@ -5,9 +5,10 @@ namespace App\View\Components;
 use Illuminate\View\Component;
 use Illuminate\View\View;
 
-class GuestLayout extends Component
+final class GuestLayout extends Component
 {
-    public function render(): View
+    #[\Override]
+    public function render(): View|\Illuminate\Contracts\View\View
     {
         return view('layouts.guest');
     }

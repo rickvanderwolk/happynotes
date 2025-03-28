@@ -5,9 +5,10 @@ namespace App\View\Components;
 use Illuminate\View\Component;
 use Illuminate\View\View;
 
-class AppLayout extends Component
+final class AppLayout extends Component
 {
-    public function render(): View
+    #[\Override]
+    public function render(): View|\Illuminate\Contracts\View\View
     {
         return view('layouts.app');
     }

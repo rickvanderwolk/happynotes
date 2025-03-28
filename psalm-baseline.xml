@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<files psalm-version="6.9.6@61488aa2849793acfb72411829d114b4aa670941">
+  <file src="app/Http/Controllers/NoteController.php">
+    <InvalidArgument>
+      <code><![CDATA[function ($query) use ($searchQuery) {
+                $query->where('title', 'LIKE', "%{$searchQuery}%")
+                    ->orWhere('body', 'LIKE', "%{$searchQuery}%");
+            }]]></code>
+    </InvalidArgument>
+    <UndefinedMethod>
+      <code><![CDATA[where]]></code>
+    </UndefinedMethod>
+  </file>
+  <file src="app/Models/Note.php">
+    <MissingTemplateParam>
+      <code><![CDATA[HasFactory]]></code>
+    </MissingTemplateParam>
+    <UndefinedPropertyAssignment>
+      <code><![CDATA[$user->all_emojis]]></code>
+    </UndefinedPropertyAssignment>
+    <UndefinedThisPropertyFetch>
+      <code><![CDATA[$this->user_id]]></code>
+    </UndefinedThisPropertyFetch>
+  </file>
+  <file src="app/Models/User.php">
+    <MissingTemplateParam>
+      <code><![CDATA[HasApiTokens]]></code>
+      <code><![CDATA[HasFactory]]></code>
+    </MissingTemplateParam>
+  </file>
+  <file src="database/factories/UserFactory.php">
+    <UndefinedClass>
+      <code><![CDATA[Team]]></code>
+    </UndefinedClass>
+  </file>
+</files>

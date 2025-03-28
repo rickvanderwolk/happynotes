@@ -7,8 +7,9 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Scope;
 use Illuminate\Support\Facades\Auth;
 
-class OwnNotesScope implements Scope
+final class OwnNotesScope implements Scope
 {
+    #[\Override]
     public function apply(Builder $builder, Model $model)
     {
         if (Auth::check()) {

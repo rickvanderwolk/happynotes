@@ -5,7 +5,7 @@ namespace App\Livewire;
 use Illuminate\Support\Facades\Auth;
 use Livewire\Component;
 
-class TextFilter extends Component
+final class TextFilter extends Component
 {
     public ?string $search_query;
     public bool $search_query_only = false;
@@ -14,14 +14,14 @@ class TextFilter extends Component
         'search_query_only' => 'boolean',
     ];
 
-    public function mount()
+    public function mount(): void
     {
         $user = Auth::user();
         $this->search_query = $user->search_query;
         $this->search_query_only = $user->search_query_only;
     }
 
-    public function updatedSearchQuery()
+    public function updatedSearchQuery(): void
     {
         $user = Auth::user();
         if ($user) {
@@ -30,7 +30,7 @@ class TextFilter extends Component
         }
     }
 
-    public function updatedSearchQueryOnly()
+    public function updatedSearchQueryOnly(): void
     {
         $user = Auth::user();
         if ($user) {
@@ -39,7 +39,7 @@ class TextFilter extends Component
         }
     }
 
-    public function render()
+    public function render(): \Illuminate\View\View|\Illuminate\Contracts\View\View
     {
         return view('livewire.text-filter', [
             'search_query' => $this->search_query,

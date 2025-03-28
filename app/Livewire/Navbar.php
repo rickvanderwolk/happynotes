@@ -5,7 +5,7 @@ namespace app\Livewire;
 use Illuminate\Support\Facades\Auth;
 use Livewire\Component;
 
-class Navbar extends Component
+final class Navbar extends Component
 {
     public $selectedEmojis = [];
     public $excludedEmojis = [];
@@ -14,13 +14,13 @@ class Navbar extends Component
 
     protected $listeners = ['filterUpdated' => 'updateFilter'];
 
-    public function mount()
+    public function mount(): void
     {
         $this->originalRoute = session('original_route_name', request()->route()->getName());
         $this->updateFilter();
     }
 
-    public function updateFilter()
+    public function updateFilter(): void
     {
         $user = Auth::user();
         $selectedEmojis = $user->selected_emojis ?? [];
@@ -40,7 +40,7 @@ class Navbar extends Component
         $this->render();
     }
 
-    public function render()
+    public function render(): \Illuminate\View\View|\Illuminate\Contracts\View\View
     {
         return view('livewire.navbar', [
             'selectedEmojis' => $this->selectedEmojis,

@@ -2,7 +2,7 @@
 
 namespace app\Helpers;
 
-class ProgressHelper
+final class ProgressHelper
 {
     public static function getProgressFromNoteBody(array $body): ?float
     {

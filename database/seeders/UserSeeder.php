@@ -5,9 +5,9 @@ namespace Database\Seeders;
 use App\Models\User;
 use Illuminate\Database\Seeder;
 
-class UserSeeder extends Seeder
+final class UserSeeder extends Seeder
 {
-    public function run()
+    public function run(): void
     {
         User::factory()->create([
             'id' => 1,
