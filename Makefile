@@ -1,4 +1,4 @@
-.PHONY: install update serve fresh audit analyse test build
+.PHONY: install update serve fresh audit analyse test build autofix checkup
 
 install:
 	@echo "🔧 Installing dependencies..."
@@ -11,8 +11,13 @@ update:
 	npm update
 
 serve:
-	@echo "🚀 Starting Laravel and Vite..."
+	@echo "🚀 Starting Laravel and Vite ($(MODE))..."
+ifeq ($(MODE),background)
+	nohup php artisan serve > storage/logs/artisan-serve.log 2>&1 &
+	nohup npm run dev > storage/logs/vite-dev.log 2>&1 &
+else
 	php artisan serve & npm run dev
+endif
 
 fresh:
 	@echo "🗑️  Resetting database..."
@@ -43,3 +48,11 @@ test:
 build:
 	@echo "📦 Building frontend..."
 	npm run build
+
+checkup:
+	@echo "🧰 Full project checkup: update → serve (bg) → analyse → test"
+	$(MAKE) update
+	$(MAKE) serve MODE=background
+	sleep 5
+	$(MAKE) analyse
+	$(MAKE) test
