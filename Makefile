@@ -12,7 +12,7 @@ update:
 
 serve:
 	@echo "🚀 Starting Laravel and Vite..."
-	php artisan serve --port=8001 & npm run dev
+	php artisan serve & npm run dev
 
 fresh:
 	@echo "🗑️  Resetting database..."
